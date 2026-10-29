@@ -1,0 +1,83 @@
+relationship ddcde9c8-7b58-474b-b884-ddebd4ae274d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: glcodes.CreateDate
+	toColumn: LocalDateTable_0ec5a4af-8b38-4b40-a735-953dcfba1137.Date
+
+relationship 1b76e845-3b88-4623-9cfd-aa7bd62b662b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: period.YearMonth
+	toColumn: LocalDateTable_1dbcacef-62bb-4014-bac3-788605225f14.Date
+
+relationship ba2ea990-f304-43b7-afa0-9b5412df17aa
+	joinOnDateBehavior: datePartOnly
+	fromColumn: period.YearMonthNoLeadingZero
+	toColumn: LocalDateTable_0e872c33-7a6e-4d0f-9169-0a6a78dc0c9d.Date
+
+relationship fdf50c44-6c2b-4061-9c9e-7bfa1736509d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: period.StartDate
+	toColumn: LocalDateTable_38acfd44-6607-4e58-9923-35c28a25b51a.Date
+
+relationship 56c403f5-710f-4cef-91cd-1d3702b0a2bb
+	joinOnDateBehavior: datePartOnly
+	fromColumn: period.EndDate
+	toColumn: LocalDateTable_26d2d4a2-54b2-4fd3-afdc-65340e5b62f4.Date
+
+relationship 74e4384f-983c-401b-8bbd-3e87f15df27a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Dates.YearMonth
+	toColumn: LocalDateTable_1d164231-ba0b-41fd-809a-e900c0cc9a65.Date
+
+relationship dd6099f9-6d2f-4bba-a88d-3cca585f06bd
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Dates.YearMonthLeadZero
+	toColumn: LocalDateTable_4b47e3be-c249-49c0-8747-b1e9884eaaec.Date
+
+relationship 9cbb3055-a6be-4582-ba05-3c2950ee9c6f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: department.CreateDate
+	toColumn: LocalDateTable_9392c24c-062b-4b67-9f30-0798383a4c0f.Date
+
+relationship 217942c9-ccca-4b58-ab36-7f4d3b5a3e8e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: branch.CreateDate
+	toColumn: LocalDateTable_d9abae59-acde-4516-bc47-1968097814dc.Date
+
+relationship AutoDetected_609faa83-5ad9-4fe6-bbff-ee7c527e3831
+	fromColumn: aggregate.BranchID
+	toColumn: branch.BranchID
+
+relationship AutoDetected_bdbb2ae3-0611-406e-b12b-1349d5232965
+	fromColumn: aggregate.DepartmentID
+	toColumn: department.DepartmentID
+
+relationship AutoDetected_c6720d2d-2898-4128-a060-027f0e26bed8
+	fromColumn: aggregate.Period
+	toColumn: period.Period
+
+relationship ea6a9fac-9f1c-e298-4b88-93539eb86958
+	fromColumn: aggregate.GLCodeID
+	toColumn: glcodes.GLHeaderID
+
+relationship 0905d8c8-5676-5972-3546-d74c50790d39
+	crossFilteringBehavior: bothDirections
+	fromColumn: Dates.Date
+	toColumn: period.StartDate
+
+relationship c52b5eca-6277-4bea-8645-fac474c0c3d8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: budget.CreatedDate
+	toColumn: LocalDateTable_74c68ca0-5ff2-4946-96cb-d25ca0714bad.Date
+
+relationship AutoDetected_26c43383-cdb9-494f-a61c-8249198327f7
+	fromColumn: budget.BranchID
+	toColumn: branch.BranchID
+
+relationship AutoDetected_1feff461-0fe0-4c1d-acfe-8ed74d59fcad
+	fromColumn: budget.DepartmentID
+	toColumn: department.DepartmentID
+
+relationship AutoDetected_d21c6d8e-c92d-49f9-8b44-3ee40385a6c7
+	fromColumn: budget.Period
+	toColumn: period.Period
+

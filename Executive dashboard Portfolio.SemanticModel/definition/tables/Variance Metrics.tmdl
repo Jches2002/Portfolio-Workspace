@@ -1,0 +1,83 @@
+table 'Variance Metrics'
+	lineageTag: b7261a59-0419-4e20-9f30-4f5afdfba905
+
+	measure 'Variance Actual' =
+			
+			SWITCH(
+			    SELECTEDVALUE('Variance Metrics'[Metric]),
+			    "Revenue", [Revenue],
+			    "Gross Profit", [Gross Profit],
+			    "Overheads", [Overheads],
+			    "Net Profit", [P&L Value]
+			)
+		formatString: "£"#,0;-"£"#,0;"£"#,0
+		lineageTag: 19ca16b2-36f3-436a-9283-ac968a0542c7
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	measure 'Variance Budget' =
+			
+			SWITCH(
+			    SELECTEDVALUE('Variance Metrics'[Metric]),
+			    "Revenue", [Revenue Budget],
+			    "Gross Profit", [Gross Profit Budget],
+			    "Overheads", [Overheads Budget],
+			    "Net Profit", [Net Profit Budget]
+			)
+		formatString: "£"#,0;-"£"#,0;"£"#,0
+		lineageTag: 6f8d6c01-9aaf-4e88-9a19-e9e63e32e5e7
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	measure 'Variance %' = ```
+			
+			DIVIDE(
+			    [Variance],
+			    ABS([Variance Budget])
+			)
+			
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: e9269618-772c-49f3-9065-16a90b6aa6c8
+
+	measure Variance = [Variance Actual] - [Variance Budget]
+		formatString: "£"#,0;-"£"#,0;"£"#,0
+		lineageTag: d7683cef-cc91-4a04-897e-d713b84ead4a
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	column Metric
+		lineageTag: 49ba0047-0a25-4209-91e0-887bfb604722
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Metric]
+		sortByColumn: Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sort
+		formatString: 0
+		lineageTag: 76d94eb5-4963-47ae-aeb6-86b1b0192297
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Sort]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Variance Metrics' = calculated
+		mode: import
+		source =
+				
+				DATATABLE(
+				    "Metric", STRING,
+				    "Sort", INTEGER,
+				    {
+				        {"Revenue", 1},
+				        {"Gross Profit", 2},
+				        {"Overheads", 3},
+				        {"Net Profit", 4}
+				    }
+				)
+
+	annotation PBI_Id = 58bd7e23b8f24c9694156775e9af3687
+

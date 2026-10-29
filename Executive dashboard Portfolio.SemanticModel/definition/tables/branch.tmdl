@@ -1,0 +1,129 @@
+table branch
+	lineageTag: 3275298b-1154-4e57-9d7d-4dc77eb2d18c
+
+	column BranchID
+		dataType: string
+		lineageTag: 4b86166f-1ada-403d-b258-c134cc375dd8
+		summarizeBy: none
+		sourceColumn: BranchID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Code
+		dataType: string
+		lineageTag: 3ae3984a-45bc-4788-a9c8-86fe362ef674
+		summarizeBy: none
+		sourceColumn: Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchHeader
+		dataType: string
+		lineageTag: 60bc6bf2-fb8c-44fa-926c-f246d2ada503
+		summarizeBy: none
+		sourceColumn: BranchHeader
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchName
+		dataType: string
+		lineageTag: a216fbf9-6a87-4a67-8948-25416bdbe92d
+		summarizeBy: none
+		sourceColumn: BranchName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Address1
+		dataType: string
+		lineageTag: 4fc26ad4-ca2e-4f5d-930b-f7c255e90ba3
+		summarizeBy: none
+		sourceColumn: Address1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Address2
+		dataType: string
+		lineageTag: 5ca36931-55b5-4f65-93c6-76c6b7fc18f5
+		summarizeBy: none
+		sourceColumn: Address2
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		lineageTag: abadd671-793f-431f-8d8b-c2650fa233df
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column PostCode
+		dataType: string
+		lineageTag: f38229d6-bb77-49a6-bfd6-0b0f4c73ea0c
+		summarizeBy: none
+		sourceColumn: PostCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column UNLOCO
+		dataType: string
+		lineageTag: c1a30489-4ddb-4aed-a651-62803ac10b70
+		summarizeBy: none
+		sourceColumn: UNLOCO
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrganisationID
+		dataType: string
+		lineageTag: f94b6c07-47d4-430f-a87e-71b2b234ab11
+		summarizeBy: none
+		sourceColumn: OrganisationID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreateDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4189705c-a0f9-4764-ad32-e087adfac8df
+		summarizeBy: none
+		sourceColumn: CreateDate
+
+		variation Variation
+			isDefault
+			relationship: 217942c9-ccca-4b58-ab36-7f4d3b5a3e8e
+			defaultHierarchy: LocalDateTable_d9abae59-acde-4516-bc47-1968097814dc.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreateUser
+		dataType: string
+		lineageTag: f585fd78-271e-4f9e-ba6d-0e001113c584
+		summarizeBy: none
+		sourceColumn: CreateUser
+
+		annotation SummarizationSetBy = Automatic
+
+	column Active
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 669ceca0-7b38-49a9-aec3-731feec5903c
+		summarizeBy: none
+		sourceColumn: Active
+
+		annotation SummarizationSetBy = Automatic
+
+	partition branch = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jack.Chesney\OneDrive - X-pand\Microsoft Fabric\BI\WLX\Master_Data.xlsx"), null, true),
+				    branch_Sheet = Source{[Item="branch",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(branch_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"BranchID", type text}, {"Code", type text}, {"BranchHeader", type text}, {"BranchName", type text}, {"Address1", type text}, {"Address2", type text}, {"City", type text}, {"PostCode", type text}, {"UNLOCO", type text}, {"OrganisationID", type text}, {"CreateDate", type datetime}, {"CreateUser", type text}, {"Active", type logical}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

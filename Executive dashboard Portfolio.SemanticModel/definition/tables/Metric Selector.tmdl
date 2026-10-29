@@ -1,0 +1,64 @@
+table 'Metric Selector'
+	lineageTag: ba330c3d-66f8-4bcb-9163-a47263d77597
+
+	measure 'Selected Actual' =
+			
+			SWITCH(
+			    SELECTEDVALUE('Metric Selector'[Metric], "Revenue"),
+			    "Revenue", [Revenue],
+			    "Gross Profit", [Gross Profit],
+			    "Overheads", [Overheads],
+			    "Net Profit", [P&L Value]
+			)
+		formatString: "£"#,0;-"£"#,0;"£"#,0
+		lineageTag: 907ceda5-c456-49d1-a25f-f50b8e455d87
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	measure 'Selected Budget' =
+			
+			SWITCH(
+			    SELECTEDVALUE('Metric Selector'[Metric], "Revenue"),
+			    "Revenue", [Revenue Budget],
+			    "Gross Profit", [Gross Profit Budget],
+			    "Overheads", [Overheads Budget],
+			    "Net Profit", [Net Profit Budget]
+			)
+		formatString: "£"#,0;-"£"#,0;"£"#,0
+		lineageTag: 2c45004b-73c3-4752-8293-9a7f49d1fdbd
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	measure 'Selected Variance %' =
+			
+			DIVIDE(
+			    [Selected Actual] - [Selected Budget],
+			    ABS([Selected Budget])
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: aefc7bfa-3af8-4af3-ae7d-c668170afd43
+
+	column Metric
+		lineageTag: c5b3ca33-21c3-434e-8398-6bb4d6c0796d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Metric]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Metric Selector' = calculated
+		mode: import
+		source =
+				
+				DATATABLE(
+				    "Metric", STRING,
+				    {
+				        {"Revenue"},
+				        {"Gross Profit"},
+				        {"Overheads"},
+				        {"Net Profit"}
+				    }
+				)
+
+	annotation PBI_Id = a6d2dbac49e0443884f2cf558f1a8ea6
+

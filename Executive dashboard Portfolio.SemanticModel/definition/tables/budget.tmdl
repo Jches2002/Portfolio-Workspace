@@ -1,0 +1,209 @@
+table budget
+	lineageTag: b41e18c2-09ab-4cca-b70a-3dc30cb1bd85
+
+	measure 'Revenue Budget' = CALCULATE(SUM(budget[BudgetAmount]),budget[PLCategory] = "Revenue")
+		lineageTag: 86969473-f1e4-4d88-99d7-ee1e0b0772d8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Revenue Variance £' = [Revenue] - [Revenue Budget]
+		lineageTag: fc38ad9b-4958-4615-a398-1bbea316543e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Revenue Variance %' = DIVIDE([Revenue Variance £],[Revenue Budget])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: ef66a025-5aca-4a22-8d90-24db8c7edf7b
+
+	measure 'Gross profit budget' =
+			
+			VAR RevenueBudget = CALCULATE(SUM(budget[BudgetAmount]), budget[PLCategory] = "Revenue")
+			VAR CostofSalesBudget = CALCULATE(SUM(budget[BudgetAmount]), budget[PLCategory] = "Cost of Sales")
+			RETURN RevenueBudget + CostofSalesBudget
+		lineageTag: a9db7d65-3e8e-49db-896f-3d5a48761c2f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Gross Profit Variance %' = DIVIDE([Gross Profit Variance],[Gross Profit Budget])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: e88e1fbc-63c2-40e6-af25-6fe553777b3b
+
+	measure 'Gross Profit Variance' = [Gross Profit] - [Gross Profit Budget]
+		lineageTag: f2c05889-bc94-4a3b-8454-70653b8bff8f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Net Profit Budget' =
+			
+			VAR RevenueBudget = CALCULATE(SUM(budget[BudgetAmount]),budget[PLCategory] = "Revenue")
+			VAR Costofsales = CALCULATE(SUM(budget[BudgetAmount]),budget[PLCategory] = "Cost of sales")
+			VAR Overheads = CALCULATE(SUM(budget[BudgetAmount]),budget[PLCategory] = "Overheads")
+			Return RevenueBudget + Costofsales + Overheads
+		lineageTag: 3ac0d3c6-5234-4163-a43f-5370e01222e0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Net Variance' = ```
+			[P&L Value]-[Net Profit Budget] 
+			```
+		lineageTag: 56ce1d04-beff-4b51-a053-6fc38406f53a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Net Profit Varinace %' = DIVIDE([Net Variance], [Net Profit Budget])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 40671032-7720-4076-9019-f9b37e6bde95
+
+	measure 'Overheads Budget' = CALCULATE(SUM(budget[BudgetAmount]),budget[PLCategory] = "Overheads")
+		lineageTag: 3e81d338-73ec-4e31-90bd-97ed5bef1902
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column BudgetID
+		dataType: string
+		lineageTag: 92ef0eda-9501-49ce-83ae-9e79bca6c5fe
+		summarizeBy: none
+		sourceColumn: BudgetID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Company
+		dataType: string
+		lineageTag: 0943e2d2-1b64-43bd-a086-6f30be69b1f2
+		summarizeBy: none
+		sourceColumn: Company
+
+		annotation SummarizationSetBy = Automatic
+
+	column Period
+		dataType: int64
+		formatString: 0
+		lineageTag: c8a2ee9a-8fe8-442f-8d96-b4f186e0ac7e
+		summarizeBy: none
+		sourceColumn: Period
+
+		annotation SummarizationSetBy = Automatic
+
+	column PeriodYear
+		dataType: int64
+		formatString: 0
+		lineageTag: f56c8768-bad0-4ccc-84e7-da1e2906e544
+		summarizeBy: sum
+		sourceColumn: PeriodYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchCode
+		dataType: string
+		lineageTag: 22851a9e-0841-48e5-8030-8d26111d9753
+		summarizeBy: none
+		sourceColumn: BranchCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchID
+		dataType: string
+		lineageTag: a36e11ec-3930-48ff-ad5b-31b0dc3816aa
+		summarizeBy: none
+		sourceColumn: BranchID
+
+		annotation SummarizationSetBy = Automatic
+
+	column DepartmentCode
+		dataType: string
+		lineageTag: 7d750160-b507-4e7c-8b53-765119a9ca33
+		summarizeBy: none
+		sourceColumn: DepartmentCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column DepartmentID
+		dataType: string
+		lineageTag: 214d7ec0-1e17-48ea-8908-1ec2a73fb986
+		summarizeBy: none
+		sourceColumn: DepartmentID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLCategory
+		dataType: string
+		lineageTag: f116ed75-acf6-4934-896d-efc08c12ba0f
+		summarizeBy: none
+		sourceColumn: PLCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column BudgetAmount
+		dataType: double
+		formatString: "£"#,0.00;-"£"#,0.00;"£"#,0.00
+		lineageTag: 56d37f9d-f75e-4224-915f-79dbc4e25782
+		summarizeBy: sum
+		sourceColumn: BudgetAmount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	column BudgetScenario
+		dataType: string
+		lineageTag: 7b82bf0e-3c16-477a-ac6e-8607d9555618
+		summarizeBy: none
+		sourceColumn: BudgetScenario
+
+		annotation SummarizationSetBy = Automatic
+
+	column BudgetVersion
+		dataType: string
+		lineageTag: 29411635-17a2-466e-b6de-2117f79c2f4b
+		summarizeBy: none
+		sourceColumn: BudgetVersion
+
+		annotation SummarizationSetBy = Automatic
+
+	column Currency
+		dataType: string
+		lineageTag: c44def7e-1453-4cfb-ada1-368f92e9cbaf
+		summarizeBy: none
+		sourceColumn: Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column BudgetType
+		dataType: string
+		lineageTag: bf597c01-339c-4564-8a8e-1a5d1f8e3535
+		summarizeBy: none
+		sourceColumn: BudgetType
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreatedDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 6754023a-6e79-4b4c-85ab-67459f0c17bf
+		summarizeBy: none
+		sourceColumn: CreatedDate
+
+		variation Variation
+			isDefault
+			relationship: c52b5eca-6277-4bea-8645-fac474c0c3d8
+			defaultHierarchy: LocalDateTable_74c68ca0-5ff2-4946-96cb-d25ca0714bad.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition budget = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jack.Chesney\OneDrive - X-pand\Microsoft Fabric\BI\WLX\Finance_Data.xlsx"), null, true),
+				    budget_Sheet = Source{[Item="budget",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(budget_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"BudgetID", type text}, {"Company", type text}, {"Period", Int64.Type}, {"PeriodYear", Int64.Type}, {"BranchCode", type text}, {"BranchID", type text}, {"DepartmentCode", type text}, {"DepartmentID", type text}, {"PLCategory", type text}, {"BudgetAmount", type number}, {"BudgetScenario", type text}, {"BudgetVersion", type text}, {"Currency", type text}, {"BudgetType", type text}, {"CreatedDate", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

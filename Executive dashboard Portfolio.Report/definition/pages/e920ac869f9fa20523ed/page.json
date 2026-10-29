@@ -1,0 +1,30 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "e920ac869f9fa20523ed",
+  "displayName": "Financial Analysis",
+  "displayOption": "FitToPage",
+  "height": 1080,
+  "width": 1920,
+  "visualInteractions": [
+    {
+      "source": "dd17b9839ac81ed4d28b",
+      "target": "bf44b00e4df36dc69fdd",
+      "type": "DataFilter"
+    },
+    {
+      "source": "dd17b9839ac81ed4d28b",
+      "target": "3f1dbb404204ca73a6fe",
+      "type": "DataFilter"
+    },
+    {
+      "source": "fe1d2f5e6544ddf5acaa",
+      "target": "bf44b00e4df36dc69fdd",
+      "type": "DataFilter"
+    },
+    {
+      "source": "fe1d2f5e6544ddf5acaa",
+      "target": "3f1dbb404204ca73a6fe",
+      "type": "DataFilter"
+    }
+  ]
+}

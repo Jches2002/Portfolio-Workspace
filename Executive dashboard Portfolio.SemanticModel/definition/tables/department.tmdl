@@ -1,0 +1,81 @@
+table department
+	lineageTag: 9419f64d-8953-4cc4-8a58-d232474fcf92
+
+	column DepartmentID
+		dataType: string
+		lineageTag: 557451c6-4b16-4d92-b831-cb7b6aa88692
+		summarizeBy: none
+		sourceColumn: DepartmentID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Code
+		dataType: string
+		lineageTag: ce9be5ad-e108-4fab-8a92-cf04b8f660a2
+		summarizeBy: none
+		sourceColumn: Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: string
+		lineageTag: 6af8423c-1cfa-4ed4-acab-8f5e2c2d223e
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreateDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 92275f8a-9184-4df8-a7c0-ce466e75c902
+		summarizeBy: none
+		sourceColumn: CreateDate
+
+		variation Variation
+			isDefault
+			relationship: 9cbb3055-a6be-4582-ba05-3c2950ee9c6f
+			defaultHierarchy: LocalDateTable_9392c24c-062b-4b67-9f30-0798383a4c0f.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreateUser
+		dataType: string
+		lineageTag: 51ebb531-6fe3-438f-941d-e7a1a4cee6c1
+		summarizeBy: none
+		sourceColumn: CreateUser
+
+		annotation SummarizationSetBy = Automatic
+
+	column Active
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: c30a5d85-43a4-4478-9f34-f07c501eb38a
+		summarizeBy: none
+		sourceColumn: Active
+
+		annotation SummarizationSetBy = Automatic
+
+	column Header
+		dataType: string
+		lineageTag: 8a67df50-8720-42cf-a7b8-55be9a7e6b86
+		summarizeBy: none
+		sourceColumn: Header
+
+		annotation SummarizationSetBy = Automatic
+
+	partition department = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jack.Chesney\OneDrive - X-pand\Microsoft Fabric\BI\WLX\Master_Data.xlsx"), null, true),
+				    department_Sheet = Source{[Item="department",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(department_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"DepartmentID", type text}, {"Code", type text}, {"Name", type text}, {"CreateDate", type datetime}, {"CreateUser", type text}, {"Active", type logical}, {"Header", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

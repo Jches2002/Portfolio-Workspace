@@ -1,0 +1,143 @@
+table Dates
+	lineageTag: f19c8fe6-96e6-4f13-8efb-72b8715709eb
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 6947dacf-1d9b-4242-8a1f-bf198203f1a9
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 43aef24f-a8a4-4b4e-84c3-8c3a3af21950
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Qtr
+		dataType: string
+		lineageTag: 15f2cc56-6ac5-47aa-ba50-4e3ce076d594
+		summarizeBy: none
+		sourceColumn: Qtr
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthName
+		dataType: string
+		lineageTag: 957da855-4cf1-4e5e-8d08-42a96cb6d55d
+		summarizeBy: none
+		sourceColumn: MonthName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: int64
+		formatString: 0
+		lineageTag: 96b987d0-a0bc-435b-9179-a3756b3335eb
+		summarizeBy: sum
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayName
+		dataType: string
+		lineageTag: 52b0b8d3-b623-402d-a95f-58c725946523
+		summarizeBy: none
+		sourceColumn: DayName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Day
+		dataType: int64
+		formatString: 0
+		lineageTag: 40c07a80-2e16-49a4-8337-813f8e83cf16
+		summarizeBy: sum
+		sourceColumn: Day
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearMonth
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 36e701f6-ceb0-4680-b8d6-f384649ac355
+		summarizeBy: none
+		sourceColumn: YearMonth
+
+		variation Variation
+			isDefault
+			relationship: 74e4384f-983c-401b-8bbd-3e87f15df27a
+			defaultHierarchy: LocalDateTable_1d164231-ba0b-41fd-809a-e900c0cc9a65.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Week
+		dataType: int64
+		formatString: 0
+		lineageTag: a46d291b-efcb-4c8a-8196-b393ac28679e
+		summarizeBy: sum
+		sourceColumn: Week
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearMonthLeadZero
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 44b7f1d6-e8c9-4c5c-aece-690343a6b49c
+		summarizeBy: none
+		sourceColumn: YearMonthLeadZero
+
+		variation Variation
+			isDefault
+			relationship: dd6099f9-6d2f-4bba-a88d-3cca585f06bd
+			defaultHierarchy: LocalDateTable_4b47e3be-c249-49c0-8747-b1e9884eaaec.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Bank Holiday'
+		dataType: int64
+		formatString: 0
+		lineageTag: 4e03ef52-9827-424c-babe-504134eb05ea
+		summarizeBy: sum
+		sourceColumn: Bank Holiday
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthYear
+		dataType: string
+		lineageTag: 9d96a49e-a76b-4c4e-a605-be58fc8682b9
+		summarizeBy: none
+		sourceColumn: MonthYear
+		sortByColumn: YearMonth
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dates = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jack.Chesney\OneDrive - X-pand\Microsoft Fabric\BI\WLX\Dates.xlsx"), null, true),
+				    Dates_Sheet = Source{[Item="Dates",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Dates_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Date", type date}, {"Year", Int64.Type}, {"Qtr", type text}, {"MonthName", type text}, {"Month", Int64.Type}, {"DayName", type text}, {"Day", Int64.Type}, {"YearMonth", type date}, {"Week", Int64.Type}, {"YearMonthLeadZero", type date}, {"Bank Holiday", Int64.Type}}),
+				    #"Added Custom" = Table.AddColumn(#"Changed Type", "YearMonth.1", each Date.ToText([Date], "MMM-yyyy")),
+				    #"Renamed Columns" = Table.RenameColumns(#"Added Custom",{{"YearMonth.1", "MonthYear"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

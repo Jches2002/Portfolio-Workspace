@@ -1,0 +1,36 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-GB
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["aggregate","glcodes","period","Dates","department","branch","budget"]
+
+ref table aggregate
+ref table glcodes
+ref table DateTableTemplate_4864e5b5-fc0d-4570-af2d-986c32343488
+ref table LocalDateTable_0ec5a4af-8b38-4b40-a735-953dcfba1137
+ref table period
+ref table LocalDateTable_1dbcacef-62bb-4014-bac3-788605225f14
+ref table LocalDateTable_0e872c33-7a6e-4d0f-9169-0a6a78dc0c9d
+ref table LocalDateTable_38acfd44-6607-4e58-9923-35c28a25b51a
+ref table LocalDateTable_26d2d4a2-54b2-4fd3-afdc-65340e5b62f4
+ref table Dates
+ref table LocalDateTable_1d164231-ba0b-41fd-809a-e900c0cc9a65
+ref table LocalDateTable_4b47e3be-c249-49c0-8747-b1e9884eaaec
+ref table department
+ref table LocalDateTable_9392c24c-062b-4b67-9f30-0798383a4c0f
+ref table branch
+ref table LocalDateTable_d9abae59-acde-4516-bc47-1968097814dc
+ref table budget
+ref table LocalDateTable_74c68ca0-5ff2-4946-96cb-d25ca0714bad
+ref table 'Metric Selector'
+ref table 'Variance Metrics'
+
+ref cultureInfo en-US
+

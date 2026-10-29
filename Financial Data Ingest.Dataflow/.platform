@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "Financial Data Ingest"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "beba1f64-d0e4-8573-4356-0b5de04c9008"
+  }
+}

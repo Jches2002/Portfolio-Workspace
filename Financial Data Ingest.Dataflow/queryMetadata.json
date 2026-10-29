@@ -1,0 +1,111 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {
+    "allowModernEvaluationEngine": true
+  },
+  "name": "Financial Data Ingest",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "DimCustomers": {
+      "queryId": "ebb0261d-2570-4e4c-9a79-2aef5bd7e367",
+      "queryName": "DimCustomers",
+      "loadEnabled": false
+    },
+    "DimBranches": {
+      "queryId": "d61c1a3c-a1ff-4811-9d42-0a3469c8b270",
+      "queryName": "DimBranches",
+      "loadEnabled": false
+    },
+    "DimServices": {
+      "queryId": "ef85de03-9103-40bd-81b7-6cad3e45841f",
+      "queryName": "DimServices",
+      "loadEnabled": false
+    },
+    "FactFinancialTransactions": {
+      "queryId": "283e63f7-d97c-4b43-aff8-0a244a5d3281",
+      "queryName": "FactFinancialTransactions",
+      "loadEnabled": false
+    },
+    "FactBudget": {
+      "queryId": "045176bd-64b5-4488-910c-02a58c20d130",
+      "queryName": "FactBudget",
+      "loadEnabled": false
+    },
+    "FactOperatingExpenses": {
+      "queryId": "77f4c8fb-d30b-4b05-9249-5f6f66f0bf02",
+      "queryName": "FactOperatingExpenses",
+      "loadEnabled": false
+    },
+    "FactOverheadBudget": {
+      "queryId": "ac533526-adb6-4c1b-9cb9-4dd540a32337",
+      "queryName": "FactOverheadBudget",
+      "loadEnabled": false
+    },
+    "Customers_DataDestination": {
+      "queryId": "cfee2f22-dce7-4e2f-9be2-c1a120ac876a",
+      "queryName": "Customers_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "DimDate": {
+      "queryId": "d1a989c0-ffc8-450b-8cad-3a64e17e6240",
+      "queryName": "DimDate",
+      "loadEnabled": false
+    },
+    "DimDate_DataDestination": {
+      "queryId": "117509b0-bcd7-4c8f-b2cc-593934bb0175",
+      "queryName": "DimDate_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "FactOverheadBudget_DataDestination": {
+      "queryId": "1604bd6f-54af-4062-b21b-306bbee02182",
+      "queryName": "FactOverheadBudget_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "FactOperatingExpenses_DataDestination": {
+      "queryId": "a4a48e3a-1a8b-478c-8ca3-595c6eca1575",
+      "queryName": "FactOperatingExpenses_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "FactBudget_DataDestination": {
+      "queryId": "1e47a556-dfff-4f63-b132-b2551ca00470",
+      "queryName": "FactBudget_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "FactFinancialTransactions_DataDestination": {
+      "queryId": "48230d6d-2ef0-4808-8607-cb67b7fadcbd",
+      "queryName": "FactFinancialTransactions_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "DimServices_DataDestination": {
+      "queryId": "081c6d8a-de0d-4e9e-85f2-42da6de0cf61",
+      "queryName": "DimServices_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "DimBranches_DataDestination": {
+      "queryId": "48ccb84e-9285-4e00-abdf-7e7ad0e9fd0f",
+      "queryName": "DimBranches_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "https://xpandlhr-my.sharepoint.com/personal/jack_chesney_xpandlogistics_co_uk/",
+      "kind": "Web",
+      "connectionId": "{\"ClusterId\":\"4fc83fd8-ddc7-466a-9b4a-42aefae111ca\",\"DatasourceId\":\"e4fded8f-038e-42c0-a16d-6f195fe1001b\"}"
+    },
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"4fc83fd8-ddc7-466a-9b4a-42aefae111ca\",\"DatasourceId\":\"29869ba1-342f-48c1-ac45-4cf92534db94\"}"
+    }
+  ]
+}

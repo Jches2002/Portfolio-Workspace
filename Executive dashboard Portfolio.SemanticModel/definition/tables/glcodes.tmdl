@@ -1,0 +1,107 @@
+table glcodes
+	lineageTag: ca175140-8174-40ba-bf3e-e08e67413b50
+
+	column GLHeaderID
+		dataType: string
+		lineageTag: 085ce332-6bb4-4547-8c64-aee6078e982e
+		summarizeBy: none
+		sourceColumn: GLHeaderID
+
+		annotation SummarizationSetBy = Automatic
+
+	column AccountNumber
+		dataType: string
+		lineageTag: 39143319-dbab-45ab-9c10-ee6f8d93762b
+		summarizeBy: none
+		sourceColumn: AccountNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		lineageTag: 0da4de3d-e291-4498-a822-ff7c96a6cac4
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column GlCodeGrouped
+		dataType: string
+		lineageTag: db1f2bc6-a9c3-4191-a5e5-8b5b5196533f
+		summarizeBy: none
+		sourceColumn: GlCodeGrouped
+
+		annotation SummarizationSetBy = Automatic
+
+	column AccountType
+		dataType: string
+		lineageTag: d6eaa411-6e4d-4618-83d7-be2493fe5b12
+		summarizeBy: none
+		sourceColumn: AccountType
+
+		annotation SummarizationSetBy = Automatic
+
+	column DebitCredit
+		dataType: string
+		lineageTag: 67aa70ea-2fbe-40d7-9475-bc40d064cfa6
+		summarizeBy: none
+		sourceColumn: DebitCredit
+
+		annotation SummarizationSetBy = Automatic
+
+	column CashflowType
+		dataType: string
+		lineageTag: 5a4f586f-ce94-4645-98c3-4e3932179eaa
+		summarizeBy: none
+		sourceColumn: CashflowType
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreateDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 0939cd5e-e8b0-42b9-8c81-27c1be99377d
+		summarizeBy: none
+		sourceColumn: CreateDate
+
+		variation Variation
+			isDefault
+			relationship: ddcde9c8-7b58-474b-b884-ddebd4ae274d
+			defaultHierarchy: LocalDateTable_0ec5a4af-8b38-4b40-a735-953dcfba1137.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ReportSection
+		dataType: string
+		lineageTag: 8d236b5b-fb94-4aeb-8826-4d5a05f0134d
+		summarizeBy: none
+		sourceColumn: ReportSection
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderByGL
+		dataType: int64
+		formatString: 0
+		lineageTag: 840cc9f4-a467-4202-95c4-755adba985cf
+		summarizeBy: sum
+		sourceColumn: OrderByGL
+
+		annotation SummarizationSetBy = Automatic
+
+	partition glcodes = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jack.Chesney\OneDrive - X-pand\Microsoft Fabric\BI\WLX\Finance_Data.xlsx"), null, true),
+				    glcodes_Sheet = Source{[Item="glcodes",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(glcodes_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"GLHeaderID", type text}, {"AccountNumber", type text}, {"Description", type text}, {"GlCodeGrouped", type text}, {"AccountType", type text}, {"DebitCredit", type text}, {"CashflowType", type text}, {"CreateDate", type date}, {"ReportSection", type text}, {"OrderByGL", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,348 @@
+table aggregate
+	lineageTag: 472810bc-f7d7-4247-ac0b-7df3e74de9d1
+
+	measure 'Gross Profit Margin' = ```
+			
+			VAR Revenue =
+			    CALCULATE(
+			        SUM('Aggregate'[AmountConverted]),
+			        glcodes[GlCodeGrouped] = "Revenue"
+			    )
+			VAR CostOfSales =
+			    -CALCULATE(  //
+			        SUM('Aggregate'[AmountConverted]),
+			        glcodes[GlCodeGrouped] = "Cost of sales"
+			    )
+			VAR GrossProfit = Revenue - CostOfSales
+			
+			RETURN
+			DIVIDE(GrossProfit, Revenue, 0)
+			
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 69755913-104a-45ff-9d87-f10a484330ea
+
+	measure 'Gross Profit' = ```
+			
+			VAR Revenue =
+			    CALCULATE(
+			        SUM('Aggregate'[AmountConverted]),
+			        glcodes[GlCodeGrouped] = "Revenue"
+			    )
+			VAR CostOfSales =
+			    -CALCULATE(            
+			        SUM('Aggregate'[AmountConverted]),
+			        glcodes[GlCodeGrouped] = "Cost of sales"
+			    )
+			RETURN
+			Revenue - CostOfSales
+			```
+		formatString: "£"#,0.00;-"£"#,0.00;"£"#,0.00
+		lineageTag: 09790070-82da-4248-8f14-d5432eee9c10
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	measure Overheads =
+			CALCULATE(
+			    SUM('aggregate'[AmountConverted]),
+			    'glcodes'[ReportSection] = "Overheads"
+			)
+		formatString: "£"#,0.00;-"£"#,0.00;"£"#,0.00
+		lineageTag: 8646710d-c210-4bae-9bfd-880e0316152a
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	measure 'Net Profit %' =
+			
+			VAR NetProfit = [Gross Profit] + [Overheads]
+			RETURN
+			DIVIDE(NetProfit, [Revenue])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 82187566-edea-4603-a5c9-eef8e4fae99f
+
+	measure 'Amount Change Status' =
+			
+			VAR CurrentAmount =
+			    SUM('aggregate'[AmountConverted])
+			
+			VAR LastMonthAmount =
+			    CALCULATE(
+			        SUM('aggregate'[AmountConverted]),
+			        PREVIOUSMONTH('period'[StartDate]),
+			        ALLEXCEPT(
+			            'aggregate',
+			            'branch'[BranchHeader],
+			            'department'[Name],
+			            'glcodes'[GLCodeGrouped],
+			            'glcodes'[Description],
+			            'aggregate'[Activity]
+			        )
+			    )
+			
+			VAR Change =
+			    CurrentAmount - LastMonthAmount
+			
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(CurrentAmount) || ISBLANK(LastMonthAmount), BLANK(),
+			        Change > 0, "Increase",
+			        Change < 0, "Decrease",
+			        "No Change"
+			    )
+		lineageTag: 7a9d10c5-f52c-4e7d-b646-4a548b8cd80a
+
+	measure 'P&L Value' =
+			
+			SUM('aggregate'[AmountConverted])
+		formatString: "£"#,0.00;-"£"#,0.00;"£"#,0.00
+		lineageTag: e9e7d08e-cbf5-4bf7-bfd3-7a08a01d1472
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	measure 'Previous Month Value' =
+			
+			VAR CurrentPeriod =
+			    SELECTEDVALUE(period[YearMonth])
+			
+			VAR PreviousPeriod =
+			    MAXX(
+			        FILTER(
+			            ALL(period),
+			            period[YearMonth] < CurrentPeriod
+			        ),
+			        period[YearMonth]
+			    )
+			
+			RETURN
+			    CALCULATE(
+			        [P&L Value],
+			        REMOVEFILTERS(period),
+			        period[YearMonth] = PreviousPeriod
+			    )
+		formatString: 0
+		lineageTag: c49cb269-5264-446a-8a82-57400336cbbb
+
+	measure 'MoM Indicator' =
+			
+			VAR CurrentValue = [P&L Value]
+			VAR PreviousValue = [Previous Month Value]
+			
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(PreviousValue), BLANK(),
+			        CurrentValue > PreviousValue, 1,
+			        CurrentValue < PreviousValue, -1,
+			        0
+			    )
+		formatString: 0
+		lineageTag: 95160212-888a-4b9e-b3d7-23200842cae4
+
+	measure Revenue = SUM('aggregate'[RevenueConverted])
+		lineageTag: fa267a42-cb90-4d3b-ab6e-04a4288d67a9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'ABS Overheads' = ABS([Overheads])
+		formatString: "£"#,0.00;-"£"#,0.00;"£"#,0.00
+		lineageTag: 3649c73d-c086-49c5-a93f-a193f2b363fa
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	column Company
+		dataType: string
+		lineageTag: a30ea8b6-b9be-4f70-b928-821866b593d6
+		summarizeBy: none
+		sourceColumn: Company
+
+		annotation SummarizationSetBy = Automatic
+
+	column GLCodeID
+		dataType: string
+		lineageTag: eca605b2-f595-49b3-b0bd-797247f96493
+		summarizeBy: none
+		sourceColumn: GLCodeID
+
+		annotation SummarizationSetBy = Automatic
+
+	column GLCode
+		dataType: string
+		lineageTag: 0e2dde0d-2424-45f5-8af0-9b38542d62da
+		summarizeBy: none
+		sourceColumn: GLCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column Units
+		dataType: int64
+		formatString: 0
+		lineageTag: 03907c07-5346-4568-ab9d-ea97080636a8
+		summarizeBy: sum
+		sourceColumn: Units
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchCode
+		dataType: string
+		lineageTag: 8f95c10b-5758-41b3-85ce-150edc4a1328
+		summarizeBy: none
+		sourceColumn: BranchCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchID
+		dataType: string
+		lineageTag: fe6542f1-23b9-4361-8654-1287cabd74ed
+		summarizeBy: none
+		sourceColumn: BranchID
+
+		annotation SummarizationSetBy = Automatic
+
+	column DepartmentCode
+		dataType: string
+		lineageTag: d514b4b6-e5f1-4fe1-9a6b-ffe4bcd68f80
+		summarizeBy: none
+		sourceColumn: DepartmentCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column DepartmentID
+		dataType: string
+		lineageTag: 5d929326-9c1d-4606-9ab2-581412f00877
+		summarizeBy: none
+		sourceColumn: DepartmentID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Activity
+		dataType: string
+		lineageTag: 942119d4-3559-4be8-991f-c7c266cf2f61
+		summarizeBy: none
+		sourceColumn: Activity
+
+		annotation SummarizationSetBy = Automatic
+
+	column Direction
+		dataType: string
+		lineageTag: b8eca7dc-b09c-408c-96d2-9dacf9b90c7e
+		summarizeBy: none
+		sourceColumn: Direction
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mode
+		dataType: string
+		lineageTag: 9f771915-c9af-4239-8be2-3e6e77748220
+		summarizeBy: none
+		sourceColumn: Mode
+
+		annotation SummarizationSetBy = Automatic
+
+	column PeriodYear
+		dataType: int64
+		formatString: 0
+		lineageTag: 2cc51e39-d703-4ec5-a23b-a5ab2f277df9
+		summarizeBy: sum
+		sourceColumn: PeriodYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column Period
+		dataType: int64
+		formatString: 0
+		lineageTag: 23f2f1ff-b4e9-4e46-aec6-160e7417356c
+		summarizeBy: none
+		sourceColumn: Period
+
+		annotation SummarizationSetBy = Automatic
+
+	column PeriodAmount
+		dataType: double
+		lineageTag: d160a814-63db-43b3-8a75-40390540c751
+		summarizeBy: sum
+		sourceColumn: PeriodAmount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Currency
+		dataType: string
+		lineageTag: f1f7ff76-0c4d-4e1b-873e-bd82b9f01c49
+		summarizeBy: none
+		sourceColumn: Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column AccountType
+		dataType: string
+		lineageTag: 90af0e5e-0048-4eda-ad51-728f7186cd47
+		summarizeBy: none
+		sourceColumn: AccountType
+
+		annotation SummarizationSetBy = Automatic
+
+	column RevenueConverted
+		dataType: double
+		formatString: "£"#,0.00;-"£"#,0.00;"£"#,0.00
+		lineageTag: a94dd4e4-361b-4786-9ba0-18eda3a0d01a
+		summarizeBy: sum
+		sourceColumn: RevenueConverted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	column CostConverted
+		dataType: double
+		lineageTag: 7f5c850c-66bc-4a75-b0e6-0bc2dc092881
+		summarizeBy: sum
+		sourceColumn: CostConverted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AmountConverted
+		dataType: double
+		formatString: "£"#,0.00;-"£"#,0.00;"£"#,0.00
+		lineageTag: bbe14356-d2bf-4452-bca5-f19822e3ff77
+		summarizeBy: sum
+		sourceColumn: AmountConverted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	column TransactionCategory
+		dataType: string
+		lineageTag: 2b1d8701-2ecd-4379-a6d0-42bf1976178c
+		summarizeBy: none
+		sourceColumn: TransactionCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreditDebit
+		dataType: string
+		lineageTag: 6fbdbaab-884f-480c-bdc9-56aae649f7b7
+		summarizeBy: none
+		sourceColumn: CreditDebit
+
+		annotation SummarizationSetBy = Automatic
+
+	partition aggregate = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jack.Chesney\OneDrive - X-pand\Microsoft Fabric\BI\WLX\Finance_Data.xlsx"), null, true),
+				    aggregate_Sheet = Source{[Item="aggregate",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(aggregate_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Company", type text}, {"GLCodeID", type text}, {"GLCode", type text}, {"Units", Int64.Type}, {"BranchCode", type text}, {"BranchID", type text}, {"DepartmentCode", type text}, {"DepartmentID", type text}, {"Activity", type text}, {"Direction", type text}, {"Mode", type text}, {"PeriodYear", Int64.Type}, {"Period", Int64.Type}, {"PeriodAmount", type number}, {"Currency", type text}, {"AccountType", type text}, {"RevenueConverted", type number}, {"CostConverted", type number}, {"AmountConverted", type number}, {"TransactionCategory", type text}, {"CreditDebit", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+
