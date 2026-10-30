@@ -294,6 +294,11 @@
         }
       ]
     },
+    "syncGroup": {
+      "groupName": "Vehicle",
+      "fieldChanges": true,
+      "filterChanges": true
+    },
     "drillFilterOtherVisuals": true
   }
 }

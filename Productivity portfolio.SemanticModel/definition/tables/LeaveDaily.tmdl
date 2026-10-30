@@ -1,0 +1,108 @@
+table LeaveDaily
+	lineageTag: 88a0a2b3-d91b-4a09-acb4-9fa8d3a3f63f
+
+	measure 'Leave Capacity %' =
+			
+			DIVIDE(
+			    [Total Users] - [Users Off],
+			    [Total Users]
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: e3746c56-72c6-4230-bb5a-847dceb85d2b
+
+	measure 'Total Users' = DISTINCTCOUNT(EmployeesOffice[EmployeeID])
+		formatString: 0
+		lineageTag: 164b23d2-7f85-4222-89f9-df610ecc37e8
+
+	measure 'Users Off' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(LeaveDaily[Employee Id]),
+			    LeaveDaily[Status] = "Approved"
+			) + 0
+		formatString: 0
+		lineageTag: dd6f6a0b-a137-462c-af8e-bc2bdf8e425b
+
+	measure 'Users Off (Names)' =
+			
+			CONCATENATEX(
+			    VALUES(LeaveDaily[Full Name]),
+			    LeaveDaily[Full Name],
+			    ", "
+			)
+		lineageTag: 4b835171-f25c-4181-920f-ba78d883082d
+
+	measure 'Row Colour' = ```
+			
+			SWITCH(
+			    TRUE(),
+			    [Leave Capacity %] < 0.5, "#DC2626",   
+			    [Leave Capacity %] < 0.75, "#F59E0B",
+			    "#16A34A"                    
+			)
+			
+			```
+		lineageTag: 98502e38-9fd1-4938-b594-8963a8e952ba
+
+	column 'Employee Id'
+		dataType: string
+		lineageTag: 3758bef8-87b4-42a5-bbe4-ddeba8da85ac
+		summarizeBy: none
+		sourceColumn: Employee Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Full Name'
+		dataType: string
+		lineageTag: ecde53a8-ec74-488c-87ab-c81e5cac7d4d
+		summarizeBy: none
+		sourceColumn: Full Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column LeaveDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: dba2cada-8630-443e-99d4-860e585eaa57
+		summarizeBy: none
+		sourceColumn: LeaveDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column Type
+		dataType: string
+		lineageTag: 034e8e74-0a7f-4dd1-a42d-aea3bf7d0e8d
+		summarizeBy: none
+		sourceColumn: Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reason
+		dataType: string
+		lineageTag: 86cdde69-7722-4433-bd65-eda3b2b94361
+		summarizeBy: none
+		sourceColumn: Reason
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		dataType: string
+		lineageTag: 140ba2d6-50c9-49d7-99d1-d6abb49403de
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition LeaveDaily = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jack.Chesney\OneDrive - X-pand\Microsoft Fabric\BI\Excel tables\Productivity_Data.xlsx"), null, true),
+				    LeaveDaily_Sheet = Source{[Item="LeaveDaily",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(LeaveDaily_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Employee Id", type text}, {"Full Name", type text}, {"LeaveDate", type datetime}, {"Type", type text}, {"Reason", type text}, {"Status", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

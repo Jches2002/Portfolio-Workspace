@@ -1,0 +1,183 @@
+table activityloggroupedorg
+	lineageTag: 80ceb571-1f15-441d-97f2-27cdda026256
+
+	column CreateDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 37c5529c-2801-4867-895b-242c58a0c43f
+		summarizeBy: none
+		sourceColumn: CreateDate
+
+		variation Variation
+			isDefault
+			relationship: a990cbd4-6bd4-4fee-b867-5e295ed680e1
+			defaultHierarchy: LocalDateTable_f8cec738-4cf3-4555-ad91-bc326c6c6a53.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column YearMonth
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 2353ed4f-7426-4b9a-94fb-3065d7bbadb0
+		summarizeBy: none
+		sourceColumn: YearMonth
+
+		variation Variation
+			isDefault
+			relationship: 0ba5f2fa-a0b3-40ac-ad09-ea4e0b64a0a1
+			defaultHierarchy: LocalDateTable_76b6da92-3dbb-48b9-bb5b-6585b57875a9.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column CreateUser
+		dataType: string
+		lineageTag: d1ad27bf-573e-489f-b3e5-c6eea1b4fcf5
+		summarizeBy: none
+		sourceColumn: CreateUser
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrganisationID
+		dataType: string
+		lineageTag: d5436632-b1cb-4d84-a031-6b2ba8c1aef9
+		summarizeBy: none
+		sourceColumn: OrganisationID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ParentID
+		dataType: string
+		lineageTag: 2a5ad05f-e524-4666-b637-a2c8422dfc68
+		summarizeBy: none
+		sourceColumn: ParentID
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchID
+		dataType: string
+		lineageTag: 60a8b51b-1560-4dac-beec-9bc6d88f78a5
+		summarizeBy: none
+		sourceColumn: BranchID
+
+		annotation SummarizationSetBy = Automatic
+
+	column DepartmentID
+		dataType: string
+		lineageTag: cf98678a-c63c-4ce8-b4f7-b0d1b04c37bf
+		summarizeBy: none
+		sourceColumn: DepartmentID
+
+		annotation SummarizationSetBy = Automatic
+
+	column JobType
+		dataType: string
+		lineageTag: 72beedb7-66fe-49fc-81a5-c35b8192cbb9
+		summarizeBy: none
+		sourceColumn: JobType
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalKeyStrokes
+		dataType: int64
+		formatString: 0
+		lineageTag: 8344f215-93c1-4b46-b0af-b7c745b13e02
+		summarizeBy: sum
+		sourceColumn: TotalKeyStrokes
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalMouseClicks
+		dataType: int64
+		formatString: 0
+		lineageTag: d3efef2b-be38-4d48-b16a-e3ae95d8cf36
+		summarizeBy: sum
+		sourceColumn: TotalMouseClicks
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalControlChanges
+		dataType: int64
+		formatString: 0
+		lineageTag: 0e3aee74-0e44-4a67-b433-f97187138a96
+		summarizeBy: sum
+		sourceColumn: TotalControlChanges
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalActiveTimeMinutes
+		dataType: double
+		lineageTag: 8e8ec361-ce53-45c9-b1fd-e204b9df7acb
+		summarizeBy: sum
+		sourceColumn: TotalActiveTimeMinutes
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TotalInactiveTimeMinutes
+		dataType: double
+		lineageTag: 05aa5c77-f6e2-4622-8792-4ec6e5dd1aec
+		summarizeBy: sum
+		sourceColumn: TotalInactiveTimeMinutes
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TotalTimeMinutes
+		dataType: double
+		lineageTag: 27e20a83-323d-49ee-bef5-4867d921fa16
+		summarizeBy: sum
+		sourceColumn: TotalTimeMinutes
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column EarliestActivity
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 657289d9-8901-4779-a7c8-e31818086278
+		summarizeBy: none
+		sourceColumn: EarliestActivity
+
+		variation Variation
+			isDefault
+			relationship: e4479bdb-0084-408f-bebf-7a5d55fda4a1
+			defaultHierarchy: LocalDateTable_fa55ca33-a619-4ad6-912f-0f2754335028.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column LatestActivity
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: cf9db425-798e-4c88-8182-9bcc2de05ea8
+		summarizeBy: none
+		sourceColumn: LatestActivity
+
+		variation Variation
+			isDefault
+			relationship: 3fed7ed3-9032-457c-a599-5dfb7df85692
+			defaultHierarchy: LocalDateTable_67d3afd6-105f-452d-b1b1-14ab39d48023.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition activityloggroupedorg = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jack.Chesney\OneDrive - X-pand\Microsoft Fabric\BI\Excel tables\Operations_Data.xlsx"), null, true),
+				    activityloggroupedorg_Sheet = Source{[Item="activityloggroupedorg",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(activityloggroupedorg_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"CreateDate", type date}, {"YearMonth", type date}, {"CreateUser", type text}, {"OrganisationID", type text}, {"ParentID", type text}, {"BranchID", type text}, {"DepartmentID", type text}, {"JobType", type text}, {"TotalKeyStrokes", Int64.Type}, {"TotalMouseClicks", Int64.Type}, {"TotalControlChanges", Int64.Type}, {"TotalActiveTimeMinutes", type number}, {"TotalInactiveTimeMinutes", type number}, {"TotalTimeMinutes", type number}, {"EarliestActivity", type datetime}, {"LatestActivity", type datetime}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

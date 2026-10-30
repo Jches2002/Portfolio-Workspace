@@ -1,0 +1,131 @@
+table OtherEventsLeave
+	lineageTag: 1ae6c0dc-3bbf-4d09-8b89-d6548c0ea016
+
+	column 'Employee Id'
+		dataType: string
+		lineageTag: e32df394-44ab-4194-97f2-8dca399bcf71
+		summarizeBy: none
+		sourceColumn: Employee Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'First Name'
+		dataType: string
+		lineageTag: 1e7a4edc-67d7-411e-ac5d-c20397012d6e
+		summarizeBy: none
+		sourceColumn: First Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Name'
+		dataType: string
+		lineageTag: e16af5a1-513b-4f8c-9b44-40f94ecb8d94
+		summarizeBy: none
+		sourceColumn: Last Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Work Email'
+		dataType: string
+		lineageTag: 4179b1cf-ff7a-4479-8128-ad8527cb10af
+		summarizeBy: none
+		sourceColumn: Work Email
+
+		annotation SummarizationSetBy = Automatic
+
+	column Department
+		dataType: string
+		lineageTag: bec2afd0-0c92-4424-8477-e850c8414ac6
+		summarizeBy: none
+		sourceColumn: Department
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Other Events Start Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 7d2d370a-7e21-4ea7-b08a-14f98fb7b8a9
+		summarizeBy: none
+		sourceColumn: Other Events Start Date
+
+		variation Variation
+			isDefault
+			relationship: f904e849-fe51-4202-b521-12eda271ca5a
+			defaultHierarchy: LocalDateTable_eaf704b0-ef3f-4dfe-bf11-e1539e6723b1.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Other Events End Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d1a91f20-0dd6-4e61-a7c0-89c872423b4e
+		summarizeBy: none
+		sourceColumn: Other Events End Date
+
+		variation Variation
+			isDefault
+			relationship: e492b876-0c51-4936-ad09-d92daf4a25f0
+			defaultHierarchy: LocalDateTable_5dd6523e-6aa4-4d4c-924a-9b844254a64b.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateEndAdd
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 76a87d01-d7fd-4bfb-93ef-299fadfb4937
+		summarizeBy: none
+		sourceColumn: DateEndAdd
+
+		variation Variation
+			isDefault
+			relationship: f57dea9e-354c-4ab5-b9b8-3b5b01d340ca
+			defaultHierarchy: LocalDateTable_5b81db2d-1096-49e3-a50c-406db5196857.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Other Events Reason'
+		dataType: string
+		lineageTag: 3d2f4e2b-263a-4e6a-b1b6-9f1311e8837f
+		summarizeBy: none
+		sourceColumn: Other Events Reason
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Other Events Duration Type'
+		dataType: string
+		lineageTag: d457d9b6-25bb-45ad-8616-8ca8d77d4f25
+		summarizeBy: none
+		sourceColumn: Other Events Duration Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Other Events Total Duration _Days_'
+		dataType: int64
+		formatString: 0
+		lineageTag: a495740b-5397-4ef2-987e-b11efe480fe9
+		summarizeBy: sum
+		sourceColumn: Other Events Total Duration _Days_
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Other Events Comments'
+		dataType: string
+		lineageTag: 9f395698-9121-46bc-8c29-46ffbb235f79
+		summarizeBy: none
+		sourceColumn: Other Events Comments
+
+		annotation SummarizationSetBy = Automatic
+
+	partition OtherEventsLeave = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jack.Chesney\OneDrive - X-pand\Microsoft Fabric\BI\Excel tables\Productivity_Data.xlsx"), null, true),
+				    OtherEventsLeave_Sheet = Source{[Item="OtherEventsLeave",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(OtherEventsLeave_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Employee Id", type text}, {"First Name", type text}, {"Last Name", type text}, {"Work Email", type text}, {"Department", type text}, {"Other Events Start Date", type datetime}, {"Other Events End Date", type datetime}, {"DateEndAdd", type datetime}, {"Other Events Reason", type text}, {"Other Events Duration Type", type text}, {"Other Events Total Duration _Days_", Int64.Type}, {"Other Events Comments", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

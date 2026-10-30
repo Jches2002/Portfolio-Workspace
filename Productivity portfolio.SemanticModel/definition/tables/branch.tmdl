@@ -1,0 +1,152 @@
+table branch
+	lineageTag: 6fce76ab-381e-4691-b7a1-5f7f8be59765
+
+	column BranchID
+		dataType: string
+		lineageTag: fe8bedef-a291-42de-9e2a-7397eada1cf6
+		summarizeBy: none
+		sourceColumn: BranchID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Code
+		dataType: string
+		lineageTag: 5a6d9b4e-e36c-496d-b19e-c077221d02d6
+		summarizeBy: none
+		sourceColumn: Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchHeader
+		dataType: string
+		lineageTag: 75851614-c594-418c-9d2b-ac06f8b935f2
+		summarizeBy: none
+		sourceColumn: BranchHeader
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchName
+		dataType: string
+		lineageTag: 0a0903b2-84e2-4a4b-907b-bed99127c27d
+		summarizeBy: none
+		sourceColumn: BranchName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Address1
+		dataType: string
+		lineageTag: 57a38c94-0aef-4932-8d6a-bc4b07cadd13
+		summarizeBy: none
+		sourceColumn: Address1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Address2
+		dataType: string
+		lineageTag: 5ed6e0d9-80ff-49b7-b50a-32e55cb58304
+		summarizeBy: none
+		sourceColumn: Address2
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		lineageTag: 82b55f8e-49f4-438f-b026-eedea2819f28
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column PostCode
+		dataType: string
+		lineageTag: cb2cba01-9191-404c-a6a3-4cb6bd239d08
+		summarizeBy: none
+		sourceColumn: PostCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column UNLOCO
+		dataType: string
+		lineageTag: 8448cba9-53c0-43f3-8fa8-1c332bb78fd2
+		summarizeBy: none
+		sourceColumn: UNLOCO
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrganisationID
+		dataType: string
+		lineageTag: 491df496-bcb4-4d54-926b-2754bff048b5
+		summarizeBy: none
+		sourceColumn: OrganisationID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreateDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 50d62afa-467e-477c-9f99-a7c497763b40
+		summarizeBy: none
+		sourceColumn: CreateDate
+
+		variation Variation
+			isDefault
+			relationship: 9c83f579-27b8-4c26-9bf0-084f9a6c1041
+			defaultHierarchy: LocalDateTable_0eb98d35-0857-4ec7-8787-834b76d709dc.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreateUser
+		dataType: string
+		lineageTag: fd12de61-cf98-4b62-b052-d397780d8e9d
+		summarizeBy: none
+		sourceColumn: CreateUser
+
+		annotation SummarizationSetBy = Automatic
+
+	column Active
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 903f36fa-9eb4-44df-a0a5-19fdb25aee9d
+		summarizeBy: none
+		sourceColumn: Active
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Portfolio Branch' =
+			
+			SWITCH(
+			    [BranchName],
+			
+			    "Test Warehouse Branch", "Chelmsford Branch",
+			    "Test North Branch", "Chelmsford Branch",
+			
+			    "Test Creative Branch", "Birmingham Branch",
+			    "Test Central Services", "Birmingham Branch",
+			    "Test Client Operations", "Birmingham Branch",
+			    "Test Air Hub Branch", "Birmingham Branch",
+			
+			    "Test Central Branch", "Manchester Branch",
+			    "Test International Branch", "Manchester Branch",
+			    "Test Warehouse Branch 2", "Manchester Branch",
+			    "Test Systems Branch", "Manchester Branch",
+			
+			    "Other"
+			)
+		lineageTag: d2bca1c6-3d04-4e0c-9fad-ee4a71f03e31
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition branch = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jack.Chesney\OneDrive - X-pand\Microsoft Fabric\BI\Excel tables\Master_Data.xlsx"), null, true),
+				    branch_Sheet = Source{[Item="branch",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(branch_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"BranchID", type text}, {"Code", type text}, {"BranchHeader", type text}, {"BranchName", type text}, {"Address1", type text}, {"Address2", type any}, {"City", type text}, {"PostCode", type text}, {"UNLOCO", type text}, {"OrganisationID", type text}, {"CreateDate", type datetime}, {"CreateUser", type text}, {"Active", type logical}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

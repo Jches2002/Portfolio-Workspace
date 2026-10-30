@@ -294,6 +294,29 @@
         }
       ]
     },
+    "syncGroup": {
+      "groupName": "Carrier Name",
+      "fieldChanges": true,
+      "filterChanges": true
+    },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "15f0eee773ade014b758",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Carriers"
+              }
+            },
+            "Property": "Carrier Name"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
   }
 }

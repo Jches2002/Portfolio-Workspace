@@ -294,6 +294,11 @@
         }
       ]
     },
+    "syncGroup": {
+      "groupName": "Branch",
+      "fieldChanges": true,
+      "filterChanges": true
+    },
     "drillFilterOtherVisuals": true
   }
 }

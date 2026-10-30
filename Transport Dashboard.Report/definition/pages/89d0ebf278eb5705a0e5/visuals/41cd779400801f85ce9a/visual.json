@@ -294,6 +294,29 @@
         }
       ]
     },
+    "syncGroup": {
+      "groupName": "Vehicle",
+      "fieldChanges": true,
+      "filterChanges": true
+    },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "4d48761b36db6032a08e",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Transport Jobs"
+              }
+            },
+            "Property": "Vehicle"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
   }
 }

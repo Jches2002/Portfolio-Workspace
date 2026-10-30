@@ -1,0 +1,125 @@
+table activityloggrouped
+	lineageTag: 6aa085ad-d80c-43ae-8ed1-fdca523c9837
+
+	column CreateDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 86d9a082-f8ac-4d74-9564-e24bb9aee049
+		summarizeBy: none
+		sourceColumn: CreateDate
+
+		variation Variation
+			isDefault
+			relationship: 73792fc0-c6ad-4619-9fc0-f6d788ad2fac
+			defaultHierarchy: LocalDateTable_a8eb79ca-cec8-4cf1-9a95-99842c0171c4.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column CreateUser
+		dataType: string
+		lineageTag: d3cf27e2-d902-41d1-a7fa-4a906dc4b023
+		summarizeBy: none
+		sourceColumn: CreateUser
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalKeyStrokes
+		dataType: int64
+		formatString: 0
+		lineageTag: d2fcdaf8-b7e6-4b42-ac78-caf9d21533df
+		summarizeBy: sum
+		sourceColumn: TotalKeyStrokes
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalMouseClicks
+		dataType: int64
+		formatString: 0
+		lineageTag: 00accf79-8ad0-46f4-ada9-ad130f0eeb4e
+		summarizeBy: sum
+		sourceColumn: TotalMouseClicks
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalControlChanges
+		dataType: int64
+		formatString: 0
+		lineageTag: 7eaa4aa3-ad88-442c-8468-6d534c32156d
+		summarizeBy: sum
+		sourceColumn: TotalControlChanges
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalActiveTimeMinutes
+		dataType: double
+		lineageTag: b76efb2c-d843-4c48-b66a-3fb4322e571c
+		summarizeBy: sum
+		sourceColumn: TotalActiveTimeMinutes
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TotalInactiveTimeMinutes
+		dataType: double
+		lineageTag: f870d793-fa2b-4158-b920-e1e99a9fa33b
+		summarizeBy: sum
+		sourceColumn: TotalInactiveTimeMinutes
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TotalTimeMinutes
+		dataType: double
+		lineageTag: 7e37adc0-832e-4528-a3a4-5e8d0abc1149
+		summarizeBy: sum
+		sourceColumn: TotalTimeMinutes
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column EarliestActivity
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 3fc37415-ef34-461e-9276-fd43ed6f5c4f
+		summarizeBy: none
+		sourceColumn: EarliestActivity
+
+		variation Variation
+			isDefault
+			relationship: 19dd1930-c659-4f5f-a4f3-c1a2d17b9564
+			defaultHierarchy: LocalDateTable_dd79a3a7-cce2-4f6f-b0a5-24018966f561.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column LatestActivity
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 00d87986-115e-46b7-96fc-750302249632
+		summarizeBy: none
+		sourceColumn: LatestActivity
+
+		variation Variation
+			isDefault
+			relationship: 3dbb4734-2b4f-419a-bf72-b9cff5829d99
+			defaultHierarchy: LocalDateTable_28d26cfc-800e-43fc-9323-34647feb6ca5.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition activityloggrouped = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jack.Chesney\OneDrive - X-pand\Microsoft Fabric\BI\Excel tables\Operations_Data.xlsx"), null, true),
+				    activityloggrouped_Sheet = Source{[Item="activityloggrouped",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(activityloggrouped_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"CreateDate", type date}, {"CreateUser", type text}, {"TotalKeyStrokes", Int64.Type}, {"TotalMouseClicks", Int64.Type}, {"TotalControlChanges", Int64.Type}, {"TotalActiveTimeMinutes", type number}, {"TotalInactiveTimeMinutes", type number}, {"TotalTimeMinutes", type number}, {"EarliestActivity", type datetime}, {"LatestActivity", type datetime}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

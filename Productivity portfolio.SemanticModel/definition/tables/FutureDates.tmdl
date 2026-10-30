@@ -1,0 +1,141 @@
+table FutureDates
+	lineageTag: 95024ecd-1c3e-4f69-926c-8e603bfd8902
+
+	measure 'SortOrder Future' = ```
+			
+			    FORMAT(MAXX(ALLSELECTED('FutureDates'[Year]), 'FutureDates'[Year]), "0000") & "-" & FORMAT(MAX('FutureDates'[Month]), "00")
+			```
+		lineageTag: 6cb58a36-ee76-49c8-9dfa-afcb83ad0f80
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4bb213df-46c7-4622-b971-de6bf203849a
+		summarizeBy: none
+		sourceColumn: Date
+
+		variation Variation
+			isDefault
+			relationship: f6963085-09a3-44bf-99e0-0e060e4e7b8d
+			defaultHierarchy: LocalDateTable_4350d21a-a06a-4762-9a88-db3d5f8fd16f.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 043e638d-427d-43e1-99ec-86b9896e2c53
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Qtr
+		dataType: string
+		lineageTag: c96406f3-9bda-4559-954b-8e4bad200b9d
+		summarizeBy: none
+		sourceColumn: Qtr
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthName
+		dataType: string
+		lineageTag: 3b3cd016-c97b-4a15-bc0d-91e232bc71fa
+		summarizeBy: none
+		sourceColumn: MonthName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: int64
+		formatString: 0
+		lineageTag: 278f61ef-9ebb-4583-a54e-5e04cf519b40
+		summarizeBy: sum
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayName
+		dataType: string
+		lineageTag: c23d8ae4-f2e2-499d-a295-14e2e953c92e
+		summarizeBy: none
+		sourceColumn: DayName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Day
+		dataType: int64
+		formatString: 0
+		lineageTag: 5e56c30b-02db-468d-9cc7-dc2bec380d50
+		summarizeBy: sum
+		sourceColumn: Day
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearMonth
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 78bbc8e0-ed22-4377-8b39-4fe1b32cd1cc
+		summarizeBy: none
+		sourceColumn: YearMonth
+
+		variation Variation
+			isDefault
+			relationship: 13707eeb-0ed9-4673-8dd4-eef4e272ef64
+			defaultHierarchy: LocalDateTable_77a9187f-d9dd-4b28-94ae-a1ad9f394905.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Week
+		dataType: int64
+		formatString: 0
+		lineageTag: 4d0ad329-3f4f-4810-86bf-4f78249ddce6
+		summarizeBy: sum
+		sourceColumn: Week
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearMonthLeadZero
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: eb525d3d-75b4-4f76-8725-fbe24e5ab7b3
+		summarizeBy: none
+		sourceColumn: YearMonthLeadZero
+
+		variation Variation
+			isDefault
+			relationship: b5e6f3ff-0b4b-450f-b686-5086fa4d412f
+			defaultHierarchy: LocalDateTable_7cd09b73-8c58-4dfb-b45f-ed8b21d268bc.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Bank Holiday'
+		dataType: int64
+		formatString: 0
+		lineageTag: d9e8b5d4-dd2e-4ef9-982e-940dbf4438e8
+		summarizeBy: sum
+		sourceColumn: Bank Holiday
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FutureDates = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jack.Chesney\OneDrive - X-pand\Microsoft Fabric\BI\Excel tables\Dates.xlsx"), null, true),
+				    FutureDates_Sheet = Source{[Item="FutureDates",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(FutureDates_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Date", type date}, {"Year", Int64.Type}, {"Qtr", type text}, {"MonthName", type text}, {"Month", Int64.Type}, {"DayName", type text}, {"Day", Int64.Type}, {"YearMonth", type date}, {"Week", Int64.Type}, {"YearMonthLeadZero", type date}, {"Bank Holiday", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

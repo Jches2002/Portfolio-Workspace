@@ -294,6 +294,11 @@
         }
       ]
     },
+    "syncGroup": {
+      "groupName": "Carrier Name",
+      "fieldChanges": true,
+      "filterChanges": true
+    },
     "drillFilterOtherVisuals": true
   }
 }

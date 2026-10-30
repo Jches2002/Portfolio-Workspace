@@ -1,0 +1,168 @@
+table EmployeeLeave
+	lineageTag: 5dfff5fd-f3f2-47f2-b39f-dada53d0de67
+
+	measure 'Absence %' =
+			
+			DIVIDE(
+			    SUM(EmployeeLeave[Duration _Days_]),
+			    [Avaliable working days],
+			    0
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 7571e1ae-d725-4a15-877c-37b5406a951b
+
+	column Comments
+		dataType: string
+		lineageTag: 93a53920-42b0-4e4a-bbfe-bc4ae9287424
+		summarizeBy: none
+		sourceColumn: Comments
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Duration _Days_'
+		dataType: int64
+		formatString: 0
+		lineageTag: 336a41c2-da78-4e4f-9569-6d606cc3bafe
+		summarizeBy: sum
+		sourceColumn: Duration _Days_
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Employee Id'
+		dataType: string
+		lineageTag: 9127f91f-42ca-4fe6-bcba-7d13420cffc4
+		summarizeBy: none
+		sourceColumn: Employee Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'End Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 3b7ffae9-1a3e-4ed6-8f4a-4645617b7b2a
+		summarizeBy: none
+		sourceColumn: End Date
+
+		variation Variation
+			isDefault
+			relationship: 0731d615-56ea-4346-9856-522fb5328c3a
+			defaultHierarchy: LocalDateTable_0c94a470-41f1-4596-85e5-487fb073e7e6.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column EndDateAdd
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1e03fba9-9245-48c1-831d-3fffda28cca1
+		summarizeBy: none
+		sourceColumn: EndDateAdd
+
+		variation Variation
+			isDefault
+			relationship: d625dc33-f62f-4b11-90a8-ce29696d695d
+			defaultHierarchy: LocalDateTable_4d4dfeb2-eac7-4400-bcae-2b8572418743.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'First Name'
+		dataType: string
+		lineageTag: ef5e6a9b-35a7-4437-a246-b36bc06e7290
+		summarizeBy: none
+		sourceColumn: First Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Full Name'
+		dataType: string
+		lineageTag: 5e4bbb10-eaa0-4106-927f-1230b5032afa
+		summarizeBy: none
+		sourceColumn: Full Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Name'
+		dataType: string
+		lineageTag: 44be5b30-dfbc-407b-9e9b-75a29a7edfa4
+		summarizeBy: none
+		sourceColumn: Last Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reason
+		dataType: string
+		lineageTag: f07be89c-3c64-47f8-aaf6-fb83582e4855
+		summarizeBy: none
+		sourceColumn: Reason
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Request Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a1ab47ab-ae4a-437e-83ff-c81ee7666203
+		summarizeBy: none
+		sourceColumn: Request Date
+
+		variation Variation
+			isDefault
+			relationship: ed95702c-5f3f-4e2c-9b22-6fe364250203
+			defaultHierarchy: LocalDateTable_58b3a6a2-9a0a-4d01-b572-928f0a352eef.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Start Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 47b4bc16-4935-4417-b828-e33b0c34ffa4
+		summarizeBy: none
+		sourceColumn: Start Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		dataType: string
+		lineageTag: 7bcd2bfe-c4a2-4f6b-a062-2963988dca46
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column Type
+		dataType: string
+		lineageTag: 6850f728-8f57-47ec-ba45-eabf8e6b51f2
+		summarizeBy: none
+		sourceColumn: Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column TypeHeader
+		dataType: string
+		lineageTag: 9a39d8d3-bec3-420d-86da-baeaf23983b6
+		summarizeBy: none
+		sourceColumn: TypeHeader
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Work Email'
+		dataType: string
+		lineageTag: 8f8b641b-2667-4f09-aee5-f8c466af766a
+		summarizeBy: none
+		sourceColumn: Work Email
+
+		annotation SummarizationSetBy = Automatic
+
+	partition EmployeeLeave = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jack.Chesney\OneDrive - X-pand\Microsoft Fabric\BI\Excel tables\Productivity_Data.xlsx"), null, true),
+				    EmployeeLeave_Sheet = Source{[Item="EmployeeLeave",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(EmployeeLeave_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Comments", type text}, {"Duration _Days_", Int64.Type}, {"Employee Id", type text}, {"End Date", type datetime}, {"EndDateAdd", type datetime}, {"First Name", type text}, {"Full Name", type text}, {"Last Name", type text}, {"Reason", type text}, {"Request Date", type datetime}, {"Start Date", type datetime}, {"Status", type text}, {"Type", type text}, {"TypeHeader", type text}, {"Work Email", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

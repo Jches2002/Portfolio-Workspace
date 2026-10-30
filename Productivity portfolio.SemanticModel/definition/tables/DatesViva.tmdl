@@ -1,0 +1,128 @@
+table DatesViva
+	lineageTag: b89ac69c-6395-40e8-90df-453010d35c5a
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 7d796e82-309e-496f-b3ad-d4cea8b46798
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 93a33a65-4f74-4333-9584-5002891750ef
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Qtr
+		dataType: string
+		lineageTag: 9f2b30e9-46f0-4bea-a595-8fa58ae68696
+		summarizeBy: none
+		sourceColumn: Qtr
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthName
+		dataType: string
+		lineageTag: ed2f2e3b-baeb-4ff8-ae43-a4bf2536f5ec
+		summarizeBy: none
+		sourceColumn: MonthName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: int64
+		formatString: 0
+		lineageTag: 86165cbd-adf5-48bd-aa4f-e20a6cc93382
+		summarizeBy: sum
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayName
+		dataType: string
+		lineageTag: 94fae783-b4d1-411e-98de-860b35cb56a3
+		summarizeBy: none
+		sourceColumn: DayName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Day
+		dataType: int64
+		formatString: 0
+		lineageTag: 8ba73509-f13d-479b-a913-28b74b9252b6
+		summarizeBy: sum
+		sourceColumn: Day
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearMonth
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ee9c0921-6135-42a8-a1a8-904dcc95d80c
+		summarizeBy: none
+		sourceColumn: YearMonth
+
+		variation Variation
+			isDefault
+			relationship: 170ff349-4bf5-4755-a642-76255c02ae45
+			defaultHierarchy: LocalDateTable_c622eb19-cea6-4cf4-8665-0a6c82017509.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Week
+		dataType: int64
+		formatString: 0
+		lineageTag: f433b508-48e7-41f0-9605-7523b2ebdc08
+		summarizeBy: sum
+		sourceColumn: Week
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearMonthLeadZero
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1d4aac9a-1639-4e1a-937c-0e597e506678
+		summarizeBy: none
+		sourceColumn: YearMonthLeadZero
+
+		variation Variation
+			isDefault
+			relationship: 8b711e68-2e1a-48eb-8644-469081073ac5
+			defaultHierarchy: LocalDateTable_eff46805-6c3d-4bad-aee2-b9cfb7e8a93d.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Bank Holiday'
+		dataType: int64
+		formatString: 0
+		lineageTag: 6b0021dc-5859-4fbe-85d9-54d038a4a9b3
+		summarizeBy: sum
+		sourceColumn: Bank Holiday
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DatesViva = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jack.Chesney\OneDrive - X-pand\Microsoft Fabric\BI\Excel tables\Dates.xlsx"), null, true),
+				    DatesViva_Sheet = Source{[Item="DatesViva",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(DatesViva_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Date", type date}, {"Year", Int64.Type}, {"Qtr", type text}, {"MonthName", type text}, {"Month", Int64.Type}, {"DayName", type text}, {"Day", Int64.Type}, {"YearMonth", type date}, {"Week", Int64.Type}, {"YearMonthLeadZero", type date}, {"Bank Holiday", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

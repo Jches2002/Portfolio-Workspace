@@ -1,0 +1,263 @@
+table aggregate
+	lineageTag: 1ba46d47-84e4-4504-a64c-35472d2ff0c8
+
+	measure 'Unutilised Cost Dynamic' =
+			
+			VAR EmployeeSelected =
+			    HASONEVALUE(EmployeesOffice[EmployeeId])
+			
+			VAR DepartmentOverheads =
+			    CALCULATE(
+			        [Salaries],
+			        REMOVEFILTERS(EmployeesOffice[EmployeeId]),
+			        REMOVEFILTERS(EmployeesOffice[Name])
+			    )
+			
+			VAR DepartmentCapacity =
+			    CALCULATE(
+			        [Capacity %],
+			        REMOVEFILTERS(EmployeesOffice[EmployeeId]),
+			        REMOVEFILTERS(EmployeesOffice[Name])
+			    )
+			
+			VAR DepartmentUnutilisedCost =
+			    DepartmentOverheads *
+			    MAX(
+			        0,
+			        1 - DepartmentCapacity
+			    )
+			
+			VAR EmployeesInDepartment =
+			    CALCULATE(
+			        DISTINCTCOUNT(EmployeesOffice[EmployeeId]),
+			        REMOVEFILTERS(EmployeesOffice[EmployeeId]),
+			        REMOVEFILTERS(EmployeesOffice[Name])
+			    )
+			
+			VAR CostAllocatedToEmployee =
+			    DIVIDE(
+			        DepartmentUnutilisedCost,
+			        EmployeesInDepartment
+			    )
+			
+			VAR EmployeeUnutilisedPercentage =
+			    MAX(
+			        0,
+			        1 - [Capacity %]
+			    )
+			
+			VAR EmployeeUnutilisedCost =
+			    CostAllocatedToEmployee
+			        * EmployeeUnutilisedPercentage
+			
+			RETURN
+			    IF(
+			        EmployeeSelected,
+			        EmployeeUnutilisedCost,
+			        DepartmentUnutilisedCost
+			    )
+		formatString: "£"#,0.00;-"£"#,0.00;"£"#,0.00
+		lineageTag: 5487b7d3-7ce4-4378-99fd-2a7e84d2334e
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	measure Salaries = CALCULATE(SUM('aggregate'[PeriodAmount]),glcodes[ReportSection] = "Overheads", glcodes[GlCodeGrouped] = "Salaries")
+		formatString: "£"#,0.00;-"£"#,0.00;"£"#,0.00
+		lineageTag: 0b53db95-1377-48f5-8dfa-d09f0701f733
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	column Company
+		dataType: string
+		lineageTag: 16d1922e-a826-45e3-b31b-d2012ea8cdfc
+		summarizeBy: none
+		sourceColumn: Company
+
+		annotation SummarizationSetBy = Automatic
+
+	column GLCodeID
+		dataType: string
+		lineageTag: 01157a39-16e6-49ef-8cf2-64e587c55df1
+		summarizeBy: none
+		sourceColumn: GLCodeID
+
+		annotation SummarizationSetBy = Automatic
+
+	column GLCode
+		dataType: string
+		lineageTag: f62ec4c3-dadb-4792-a3dc-21ef4e3a45e3
+		summarizeBy: none
+		sourceColumn: GLCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column Units
+		dataType: int64
+		formatString: 0
+		lineageTag: 94dabb6f-4b3c-4e57-9d1b-38ddcaf07e3f
+		summarizeBy: sum
+		sourceColumn: Units
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchCode
+		dataType: string
+		lineageTag: cdb567e3-f0c4-4460-bb17-5d53eb714dd3
+		summarizeBy: none
+		sourceColumn: BranchCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchID
+		dataType: string
+		lineageTag: a2691dba-181a-4fe9-b270-dce1a14f09d8
+		summarizeBy: none
+		sourceColumn: BranchID
+
+		annotation SummarizationSetBy = Automatic
+
+	column DepartmentCode
+		dataType: string
+		lineageTag: 2de172ef-cb92-4d0d-b802-2e767d7619c2
+		summarizeBy: none
+		sourceColumn: DepartmentCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column DepartmentID
+		dataType: string
+		lineageTag: 8f39dbfe-16b9-4949-9c3c-a82aaf406ae4
+		summarizeBy: none
+		sourceColumn: DepartmentID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Activity
+		dataType: string
+		lineageTag: b739b3ad-30a4-41a4-80b9-3e516d56c013
+		summarizeBy: none
+		sourceColumn: Activity
+
+		annotation SummarizationSetBy = Automatic
+
+	column Direction
+		dataType: string
+		lineageTag: 5b267778-0401-423e-976d-a34c0c999b50
+		summarizeBy: none
+		sourceColumn: Direction
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mode
+		dataType: string
+		lineageTag: 045aadb9-eb89-465e-977e-cbe3f2c6eab9
+		summarizeBy: none
+		sourceColumn: Mode
+
+		annotation SummarizationSetBy = Automatic
+
+	column PeriodYear
+		dataType: int64
+		formatString: 0
+		lineageTag: e5e4d921-2d07-40ad-b7ea-54e16cb76b4c
+		summarizeBy: sum
+		sourceColumn: PeriodYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column Period
+		dataType: int64
+		formatString: 0
+		lineageTag: ce1b759a-adfa-4f03-9c50-04c806d484e1
+		summarizeBy: none
+		sourceColumn: Period
+
+		annotation SummarizationSetBy = Automatic
+
+	column PeriodAmount
+		dataType: double
+		lineageTag: 35ebe4f7-03a1-4154-b720-2896487ecf0d
+		summarizeBy: sum
+		sourceColumn: PeriodAmount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Currency
+		dataType: string
+		lineageTag: 4c2ad1d5-4f34-4aec-98f2-a62882478af1
+		summarizeBy: none
+		sourceColumn: Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column AccountType
+		dataType: string
+		lineageTag: 2055031b-7f6e-4451-bb46-8416acd3039d
+		summarizeBy: none
+		sourceColumn: AccountType
+
+		annotation SummarizationSetBy = Automatic
+
+	column RevenueConverted
+		dataType: double
+		lineageTag: 422b5057-add3-4b49-88bd-75b0e59694d9
+		summarizeBy: sum
+		sourceColumn: RevenueConverted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CostConverted
+		dataType: double
+		lineageTag: b397677b-4219-426e-b96d-e43a83f22b1e
+		summarizeBy: sum
+		sourceColumn: CostConverted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AmountConverted
+		dataType: double
+		lineageTag: 4672bad4-8b9b-4116-a252-7d34cc4521fb
+		summarizeBy: sum
+		sourceColumn: AmountConverted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TransactionCategory
+		dataType: string
+		lineageTag: 3ef79c3c-288e-416d-b771-252edbd7890e
+		summarizeBy: none
+		sourceColumn: TransactionCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreditDebit
+		dataType: string
+		lineageTag: 6a6bff76-fd8a-4f2a-ac98-b79450bf0e07
+		summarizeBy: none
+		sourceColumn: CreditDebit
+
+		annotation SummarizationSetBy = Automatic
+
+	partition aggregate = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jack.Chesney\OneDrive - X-pand\Microsoft Fabric\BI\Excel tables\Finance_Data.xlsx"), null, true),
+				    aggregate_Sheet = Source{[Item="aggregate",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(aggregate_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Company", type text}, {"GLCodeID", type text}, {"GLCode", type text}, {"Units", Int64.Type}, {"BranchCode", type text}, {"BranchID", type text}, {"DepartmentCode", type text}, {"DepartmentID", type text}, {"Activity", type text}, {"Direction", type text}, {"Mode", type text}, {"PeriodYear", Int64.Type}, {"Period", Int64.Type}, {"PeriodAmount", type number}, {"Currency", type text}, {"AccountType", type text}, {"RevenueConverted", type number}, {"CostConverted", type number}, {"AmountConverted", type number}, {"TransactionCategory", type text}, {"CreditDebit", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

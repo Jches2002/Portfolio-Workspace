@@ -1,0 +1,217 @@
+table jobheader
+	lineageTag: 03c9613b-fb83-45a3-854d-a8633ae98162
+
+	column JobHeaderID
+		dataType: string
+		lineageTag: f10016a7-4fda-4b8f-8cd0-2a6dfb61e5aa
+		summarizeBy: none
+		sourceColumn: JobHeaderID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ref
+		dataType: string
+		lineageTag: 7cb9eb13-6f3d-44f9-88d9-3c2644cbb09d
+		summarizeBy: none
+		sourceColumn: Ref
+
+		annotation SummarizationSetBy = Automatic
+
+	column ParentID
+		dataType: string
+		lineageTag: d95e114f-c627-4738-9b63-85c6f4962b28
+		summarizeBy: none
+		sourceColumn: ParentID
+
+		annotation SummarizationSetBy = Automatic
+
+	column QuoteRef
+		dataType: string
+		lineageTag: 3fd5b6c6-571d-487d-903d-28b55cc1e5e8
+		summarizeBy: none
+		sourceColumn: QuoteRef
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClientID
+		dataType: string
+		lineageTag: 76d4e612-32f0-4002-89e8-4c59f47b385f
+		summarizeBy: none
+		sourceColumn: ClientID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClientCode
+		dataType: string
+		lineageTag: 7a1b8efc-b38b-49c6-8678-ab742b6f7092
+		summarizeBy: none
+		sourceColumn: ClientCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClientName
+		dataType: string
+		lineageTag: bb884bf7-db1a-404c-8dc4-b606e4d01126
+		summarizeBy: none
+		sourceColumn: ClientName
+
+		annotation SummarizationSetBy = Automatic
+
+	column AgentID
+		dataType: string
+		lineageTag: d92f49e4-fec0-4f64-9d58-d39ffc9e54c7
+		summarizeBy: none
+		sourceColumn: AgentID
+
+		annotation SummarizationSetBy = Automatic
+
+	column AgentCode
+		dataType: string
+		lineageTag: dd1f2774-156f-4143-bdef-d752181315ed
+		summarizeBy: none
+		sourceColumn: AgentCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column AgentName
+		dataType: string
+		lineageTag: df40d528-b826-44ed-af4b-491bcf27b953
+		summarizeBy: none
+		sourceColumn: AgentName
+
+		annotation SummarizationSetBy = Automatic
+
+	column JobType
+		dataType: string
+		lineageTag: 42e89b3a-aa47-4345-88a2-24498a1cffe1
+		summarizeBy: none
+		sourceColumn: JobType
+
+		annotation SummarizationSetBy = Automatic
+
+	column SubJobType
+		dataType: string
+		lineageTag: d6b0e802-a069-4452-bee3-f3f41641e7b4
+		summarizeBy: none
+		sourceColumn: SubJobType
+
+		annotation SummarizationSetBy = Automatic
+
+	column DirectionHeader
+		dataType: string
+		lineageTag: 2c552c9a-3702-4f9b-a892-ff2b7dc62a8a
+		summarizeBy: none
+		sourceColumn: DirectionHeader
+
+		annotation SummarizationSetBy = Automatic
+
+	column BenchmarkHeader
+		dataType: string
+		lineageTag: 87c5209b-b113-46db-82b4-6ec3ff0b12d1
+		summarizeBy: none
+		sourceColumn: BenchmarkHeader
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		dataType: string
+		lineageTag: a601169d-389c-4168-84f2-bf7fc99e4cba
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchID
+		dataType: string
+		lineageTag: 0fc623da-4e9c-4219-9067-bec2ff4f35b7
+		summarizeBy: none
+		sourceColumn: BranchID
+
+		annotation SummarizationSetBy = Automatic
+
+	column DepartmentID
+		dataType: string
+		lineageTag: c9e40406-790b-47bf-ab94-2676c96ecbed
+		summarizeBy: none
+		sourceColumn: DepartmentID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreateDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a9dd2ee3-c79b-488e-9030-f6aa11d47cff
+		summarizeBy: none
+		sourceColumn: CreateDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearMonth
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 44c499de-35fc-4c68-b158-fe64d4cc7b35
+		summarizeBy: none
+		sourceColumn: YearMonth
+
+		variation Variation
+			isDefault
+			relationship: 5d383b52-f745-48bf-a4ef-22fc0d4339c4
+			defaultHierarchy: LocalDateTable_bdbf2cd2-afd6-4bc6-a7e5-83189cf7da6c.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column CreateUser
+		dataType: string
+		lineageTag: 4308b2eb-27ed-49c9-a5a3-eed8416feac0
+		summarizeBy: none
+		sourceColumn: CreateUser
+
+		annotation SummarizationSetBy = Automatic
+
+	column SalesRep
+		dataType: string
+		lineageTag: ebeb71fb-e035-4ba0-b39f-c0b9865c45fa
+		summarizeBy: none
+		sourceColumn: SalesRep
+
+		annotation SummarizationSetBy = Automatic
+
+	column OpsRep
+		dataType: string
+		lineageTag: 27ac4ba6-d20a-4fa8-b724-58a4c9132622
+		summarizeBy: none
+		sourceColumn: OpsRep
+
+		annotation SummarizationSetBy = Automatic
+
+	column RevenueRecognitionDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f6e14492-3d6e-43ee-b711-ff814291120a
+		summarizeBy: none
+		sourceColumn: RevenueRecognitionDate
+
+		variation Variation
+			isDefault
+			relationship: 62438f36-bb0e-4fff-84b5-712213744f10
+			defaultHierarchy: LocalDateTable_a452dd12-3d1d-433e-907a-b3d7547a39d1.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition jobheader = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jack.Chesney\OneDrive - X-pand\Microsoft Fabric\BI\Excel tables\Operations_Data.xlsx"), null, true),
+				    jobheader_Sheet = Source{[Item="jobheader",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(jobheader_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"JobHeaderID", type text}, {"Ref", type text}, {"ParentID", type text}, {"QuoteRef", type text}, {"ClientID", type text}, {"ClientCode", type text}, {"ClientName", type text}, {"AgentID", type text}, {"AgentCode", type text}, {"AgentName", type text}, {"JobType", type text}, {"SubJobType", type text}, {"DirectionHeader", type text}, {"BenchmarkHeader", type text}, {"Status", type text}, {"BranchID", type text}, {"DepartmentID", type text}, {"CreateDate", type datetime}, {"YearMonth", type date}, {"CreateUser", type text}, {"SalesRep", type text}, {"OpsRep", type text}, {"RevenueRecognitionDate", type datetime}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

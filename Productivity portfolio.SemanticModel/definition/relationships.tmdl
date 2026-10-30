@@ -1,0 +1,320 @@
+relationship 5d383b52-f745-48bf-a4ef-22fc0d4339c4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: jobheader.YearMonth
+	toColumn: LocalDateTable_bdbf2cd2-afd6-4bc6-a7e5-83189cf7da6c.Date
+
+relationship 62438f36-bb0e-4fff-84b5-712213744f10
+	joinOnDateBehavior: datePartOnly
+	fromColumn: jobheader.RevenueRecognitionDate
+	toColumn: LocalDateTable_a452dd12-3d1d-433e-907a-b3d7547a39d1.Date
+
+relationship 29971197-33d5-4c56-92c6-124db74a72e7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: activitylog.OpenDateTime
+	toColumn: LocalDateTable_84e918e6-5ab0-40b4-8c81-09e81ffdfda4.Date
+
+relationship 9668a684-299d-4bc3-a244-9625fd9d03ea
+	joinOnDateBehavior: datePartOnly
+	fromColumn: activitylog.CreateDate
+	toColumn: LocalDateTable_55824443-e9e5-4d75-aa53-86ab53769d73.Date
+
+relationship ff0ec42c-c1fc-4a15-9812-b2325d561170
+	joinOnDateBehavior: datePartOnly
+	fromColumn: activitylog.CloseDateTime
+	toColumn: LocalDateTable_5e602f3f-dc37-4b6e-ae3a-4525aa08a150.Date
+
+relationship 82d51d52-dfd3-4d7d-9536-dec8d182cdec
+	joinOnDateBehavior: datePartOnly
+	fromColumn: activitylog.RevenueRecognizedDateYYYYMM
+	toColumn: LocalDateTable_64bf318f-6009-47b3-ac5b-613fc1090d21.Date
+
+relationship 65f5779d-3cd4-4c36-a736-177f7aefa84b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: activitylog.RecognitionDate
+	toColumn: LocalDateTable_89446737-0e50-4baf-a26b-3200f42ff858.Date
+
+relationship 73792fc0-c6ad-4619-9fc0-f6d788ad2fac
+	joinOnDateBehavior: datePartOnly
+	fromColumn: activityloggrouped.CreateDate
+	toColumn: LocalDateTable_a8eb79ca-cec8-4cf1-9a95-99842c0171c4.Date
+
+relationship 19dd1930-c659-4f5f-a4f3-c1a2d17b9564
+	joinOnDateBehavior: datePartOnly
+	fromColumn: activityloggrouped.EarliestActivity
+	toColumn: LocalDateTable_dd79a3a7-cce2-4f6f-b0a5-24018966f561.Date
+
+relationship 3dbb4734-2b4f-419a-bf72-b9cff5829d99
+	joinOnDateBehavior: datePartOnly
+	fromColumn: activityloggrouped.LatestActivity
+	toColumn: LocalDateTable_28d26cfc-800e-43fc-9323-34647feb6ca5.Date
+
+relationship a990cbd4-6bd4-4fee-b867-5e295ed680e1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: activityloggroupedorg.CreateDate
+	toColumn: LocalDateTable_f8cec738-4cf3-4555-ad91-bc326c6c6a53.Date
+
+relationship 0ba5f2fa-a0b3-40ac-ad09-ea4e0b64a0a1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: activityloggroupedorg.YearMonth
+	toColumn: LocalDateTable_76b6da92-3dbb-48b9-bb5b-6585b57875a9.Date
+
+relationship e4479bdb-0084-408f-bebf-7a5d55fda4a1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: activityloggroupedorg.EarliestActivity
+	toColumn: LocalDateTable_fa55ca33-a619-4ad6-912f-0f2754335028.Date
+
+relationship 3fed7ed3-9032-457c-a599-5dfb7df85692
+	joinOnDateBehavior: datePartOnly
+	fromColumn: activityloggroupedorg.LatestActivity
+	toColumn: LocalDateTable_67d3afd6-105f-452d-b1b1-14ab39d48023.Date
+
+relationship 9c83f579-27b8-4c26-9bf0-084f9a6c1041
+	joinOnDateBehavior: datePartOnly
+	fromColumn: branch.CreateDate
+	toColumn: LocalDateTable_0eb98d35-0857-4ec7-8787-834b76d709dc.Date
+
+relationship 5d90eabd-e6e0-40e0-97b3-8183ff0c9f5d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: department.CreateDate
+	toColumn: LocalDateTable_14709b04-e7eb-4c21-8917-1caa557f601e.Date
+
+relationship d7ab4ef5-74ec-45d3-b6b2-a33a897c60ad
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Holiday.'Holiday Start Date'
+	toColumn: LocalDateTable_d179ee75-ebcb-4d86-b85e-fe54c965bc35.Date
+
+relationship 36078252-0af6-4e5e-b018-d552463d8169
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Holiday.'Holiday End Date'
+	toColumn: LocalDateTable_7809e8a0-1ff5-4aed-b3b7-0d6259a27746.Date
+
+relationship fd4bda53-5484-4914-886b-684cd627be2f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Holiday.EndDateAdd
+	toColumn: LocalDateTable_738eed28-0c3b-4570-8c8e-5e462bafc671.Date
+
+relationship 3fad427f-5d7e-4a50-bdc7-45f71d1dd096
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Holiday.'Holiday Request Date'
+	toColumn: LocalDateTable_fae961ed-a750-4b44-85f0-3908a5f107b9.Date
+
+relationship f904e849-fe51-4202-b521-12eda271ca5a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: OtherEventsLeave.'Other Events Start Date'
+	toColumn: LocalDateTable_eaf704b0-ef3f-4dfe-bf11-e1539e6723b1.Date
+
+relationship e492b876-0c51-4936-ad09-d92daf4a25f0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: OtherEventsLeave.'Other Events End Date'
+	toColumn: LocalDateTable_5dd6523e-6aa4-4d4c-924a-9b844254a64b.Date
+
+relationship f57dea9e-354c-4ab5-b9b8-3b5b01d340ca
+	joinOnDateBehavior: datePartOnly
+	fromColumn: OtherEventsLeave.DateEndAdd
+	toColumn: LocalDateTable_5b81db2d-1096-49e3-a50c-406db5196857.Date
+
+relationship 663c7fd1-bde7-4f6b-8435-e2f545ac2e0d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: PeopleHR_Staff.'Start Date'
+	toColumn: LocalDateTable_ed498c10-a6de-4030-aa4f-564bc8318218.Date
+
+relationship e2545326-24a6-41f0-81f2-18a35e1bffe2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: PeopleHR_Staff.'Final Day Employment'
+	toColumn: LocalDateTable_60d9ede2-06fe-446a-b355-c5a080b3c714.Date
+
+relationship b3bc0f28-fb73-4c32-92a3-4ed36a9e1a14
+	joinOnDateBehavior: datePartOnly
+	fromColumn: SickDays.'Sick Start Date'
+	toColumn: LocalDateTable_7bdfb120-15b0-4b69-8ad7-e15fd8f8eb69.Date
+
+relationship 8dc54d97-e3c2-49cf-970a-b282ea4c19d0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: SickDays.'Sick End Date'
+	toColumn: LocalDateTable_2954d640-d01c-4a8f-a4c3-e41d17ea5829.Date
+
+relationship 599e5565-515d-4db4-bd55-9e03dea9d22f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: SickDays.SickEndAdd
+	toColumn: LocalDateTable_4ab9f155-79ec-4ff7-ada6-59f5c85b9528.Date
+
+relationship cc5a8433-b5dd-46a9-b2c9-8b690b09c02b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: organisations.CreateDate
+	toColumn: LocalDateTable_fe05d96c-30c7-43fa-bbb4-f4bbb2c24903.Date
+
+relationship AutoDetected_67fd3248-dd7a-47af-b108-4bb56a3084b5
+	fromColumn: aggregate.BranchID
+	toColumn: branch.BranchID
+
+relationship AutoDetected_5902ea32-0146-46e7-a95d-2b7c5021c7fe
+	fromColumn: aggregate.DepartmentID
+	toColumn: department.DepartmentID
+
+relationship 71b6f2f3-1f64-a297-b714-54b1c161f65f
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: Benchmarks.Header
+	toColumn: jobheader.BenchmarkHeader
+
+relationship 30765ca0-04d4-f94a-58bb-17b51db1bd0b
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: Benchmarks.Header
+	toColumn: activitylog.BenchmarkHeader
+
+relationship 0731d615-56ea-4346-9856-522fb5328c3a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: EmployeeLeave.'End Date'
+	toColumn: LocalDateTable_0c94a470-41f1-4596-85e5-487fb073e7e6.Date
+
+relationship d625dc33-f62f-4b11-90a8-ce29696d695d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: EmployeeLeave.EndDateAdd
+	toColumn: LocalDateTable_4d4dfeb2-eac7-4400-bcae-2b8572418743.Date
+
+relationship ed95702c-5f3f-4e2c-9b22-6fe364250203
+	joinOnDateBehavior: datePartOnly
+	fromColumn: EmployeeLeave.'Request Date'
+	toColumn: LocalDateTable_58b3a6a2-9a0a-4d01-b572-928f0a352eef.Date
+
+relationship c1370329-ccfd-4af3-8def-9433a1bb0258
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Dates.Date
+	toColumn: LocalDateTable_12232360-a7d9-49c3-a7c7-25f5c09100b4.Date
+
+relationship 8245fe62-6a3e-4e22-a418-51bda14b50ba
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Dates.YearMonth
+	toColumn: LocalDateTable_922200ce-5e6e-486a-8559-2f19068a8190.Date
+
+relationship ee4a6e0b-b4bc-4e34-af64-48592bbaa57e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Dates.YearMonthLeadZero
+	toColumn: LocalDateTable_2f573f99-436f-48e8-b291-1eccf3534d0b.Date
+
+relationship 170ff349-4bf5-4755-a642-76255c02ae45
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DatesViva.YearMonth
+	toColumn: LocalDateTable_c622eb19-cea6-4cf4-8665-0a6c82017509.Date
+
+relationship 8b711e68-2e1a-48eb-8644-469081073ac5
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DatesViva.YearMonthLeadZero
+	toColumn: LocalDateTable_eff46805-6c3d-4bad-aee2-b9cfb7e8a93d.Date
+
+relationship f6963085-09a3-44bf-99e0-0e060e4e7b8d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FutureDates.Date
+	toColumn: LocalDateTable_4350d21a-a06a-4762-9a88-db3d5f8fd16f.Date
+
+relationship 13707eeb-0ed9-4673-8dd4-eef4e272ef64
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FutureDates.YearMonth
+	toColumn: LocalDateTable_77a9187f-d9dd-4b28-94ae-a1ad9f394905.Date
+
+relationship b5e6f3ff-0b4b-450f-b686-5086fa4d412f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FutureDates.YearMonthLeadZero
+	toColumn: LocalDateTable_7cd09b73-8c58-4dfb-b45f-ed8b21d268bc.Date
+
+relationship 2313a443-a435-08a7-1179-443f41d5618e
+	fromColumn: ActivityMerged.Date
+	toColumn: DatesViva.Date
+
+relationship 2454e327-ab30-cde0-691c-66ceee778bd2
+	fromColumn: ActivityMerged.Email
+	toColumn: EmployeesOffice.EmailAddress
+
+relationship 7997ed72-62e1-44d8-dfe0-f9cc1babaab1
+	fromColumn: jobheader.CreateDate
+	toColumn: DatesViva.Date
+
+relationship 28c23680-03e0-c1b8-e9e3-1a11a5468132
+	fromColumn: jobheader.OpsRep
+	toColumn: EmployeesOffice.Code
+
+relationship 3c881bb4-2701-d623-a662-6a7324b51cd0
+	fromColumn: EmployeeLeave.'Employee Id'
+	toColumn: EmployeesOffice.EmployeeID
+
+relationship a58bf2d2-9585-11ab-5aa2-91634cf75c62
+	fromColumn: EmployeeLeave.'Start Date'
+	toColumn: DatesViva.Date
+
+relationship 1f90534c-7fd2-ae83-3ed1-8a6c742f0890
+	fromColumn: EmployeesOffice.DepartmentID
+	toColumn: department.DepartmentID
+
+relationship 8656ed1f-75f6-ccb4-32fc-665a3c8bf0b8
+	fromColumn: EmployeesOffice.BranchID
+	toColumn: branch.BranchID
+
+relationship 988c51c7-a9c3-91ed-f80d-0968c1493e64
+	fromColumn: ActivityMerged.Date
+	toColumn: Dates.Date
+
+relationship 633b4368-ba5f-ba03-4489-c0b7669187e3
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: PeopleHR_Staff.'Employee Id'
+	toColumn: EmployeesOffice.EmployeeID
+
+relationship 2fcbaf09-30da-2e2e-1285-532757f4509e
+	fromColumn: LeaveDaily.'Employee Id'
+	toColumn: EmployeesOffice.EmployeeID
+
+relationship 9b351e65-c611-5ee8-909f-9d6f31f258f1
+	fromColumn: LeaveDaily.LeaveDate
+	toColumn: FutureDates.Date
+
+relationship aec999d8-0ed2-4970-957d-7f02b7a515ce
+	fromColumn: EmployeeLeave.'Start Date'
+	toColumn: FutureDates.Date
+
+relationship 16a5ae74-17b1-641e-4ca5-59196542fc7f
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: EmployeeLeave.Type
+	toColumn: LeaveDaily.Type
+
+relationship bfc4b6ab-573a-4a44-962a-cf870de63ae4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: glcodes.CreateDate
+	toColumn: LocalDateTable_c5ef8550-0835-4af3-a99f-f3b68be6f64a.Date
+
+relationship b3ad34da-7ea4-cbb8-3792-5ca6f2a5ec51
+	fromColumn: aggregate.GLCodeID
+	toColumn: glcodes.GLHeaderID
+
+relationship eb56ac12-ab38-4eff-834c-c85634ede442
+	joinOnDateBehavior: datePartOnly
+	fromColumn: period.YearMonth
+	toColumn: LocalDateTable_86c19763-a749-4f74-b3f4-dbeb491030ef.Date
+
+relationship 14cc3569-f967-4298-beb7-4651092bb0f0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: period.YearMonthNoLeadingZero
+	toColumn: LocalDateTable_84c0de45-e3ca-4bdd-befb-ae686154b87f.Date
+
+relationship 9035018c-25c8-4570-bcac-4515e197dcef
+	joinOnDateBehavior: datePartOnly
+	fromColumn: period.StartDate
+	toColumn: LocalDateTable_a56c80a8-7fdd-4fc4-a51e-ad6c6ef5d8b2.Date
+
+relationship 06b30d81-e44c-43aa-9adb-b2fb91ca2aa1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: period.EndDate
+	toColumn: LocalDateTable_212c2b53-fc33-4350-8d4e-e0031b94ce77.Date
+
+relationship AutoDetected_ba67dc00-4c98-4e11-8c60-c0fc6e276e6c
+	crossFilteringBehavior: bothDirections
+	fromColumn: aggregate.Period
+	toColumn: period.Period
+
+relationship 4cc61e5f-9ced-7c15-ec54-7bdb4e98b78e
+	crossFilteringBehavior: bothDirections
+	fromColumn: DatesViva.Date
+	toColumn: period.StartDate
+

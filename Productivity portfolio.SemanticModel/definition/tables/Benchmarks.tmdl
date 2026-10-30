@@ -1,0 +1,81 @@
+table Benchmarks
+	lineageTag: 63a312c5-a4cc-4428-a4b2-a9026de27aa9
+
+	column 'Benchmark Value'
+		dataType: int64
+		formatString: 0
+		lineageTag: 6c7cbfd9-3bde-4838-8660-ff9591b552e5
+		summarizeBy: sum
+		sourceColumn: Benchmark Value
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Bottom10 Line'
+		dataType: double
+		formatString: 0
+		lineageTag: c855b50e-5395-4614-bf18-4c3756f17e01
+		summarizeBy: sum
+		sourceColumn: Bottom10 Line
+
+		annotation SummarizationSetBy = Automatic
+
+	column Header
+		dataType: string
+		lineageTag: f1e8c135-547d-45df-855f-26bd8c5c3ca5
+		summarizeBy: none
+		sourceColumn: Header
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Median Line'
+		dataType: int64
+		formatString: 0
+		lineageTag: 5e183f1c-3807-4e7a-b9c4-203f05d40ed8
+		summarizeBy: sum
+		sourceColumn: Median Line
+
+		annotation SummarizationSetBy = Automatic
+
+	column Percentile
+		dataType: int64
+		formatString: 0
+		lineageTag: e018e212-64e9-45ad-b4a9-74822d7f945f
+		summarizeBy: sum
+		sourceColumn: Percentile
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Top10 Line'
+		dataType: double
+		formatString: 0
+		lineageTag: e3d03f21-8525-4a26-b53e-0d8b9a82d775
+		summarizeBy: sum
+		sourceColumn: Top10 Line
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value
+		dataType: double
+		lineageTag: 0b483126-899a-404c-a3ab-0d2b63fa007e
+		summarizeBy: sum
+		sourceColumn: Value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Benchmarks = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jack.Chesney\OneDrive - X-pand\Microsoft Fabric\BI\Excel tables\Productivity_Data.xlsx"), null, true),
+				    Benchmarks_Sheet = Source{[Item="Benchmarks",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Benchmarks_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Benchmark Value", Int64.Type}, {"Bottom10 Line", type number}, {"Header", type text}, {"Median Line", Int64.Type}, {"Percentile", Int64.Type}, {"Top10 Line", type number}, {"Value", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

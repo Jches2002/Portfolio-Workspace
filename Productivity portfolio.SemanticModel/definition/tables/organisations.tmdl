@@ -1,0 +1,384 @@
+table organisations
+	lineageTag: e5a6a333-cc61-45f8-a859-ea6603d5bc7b
+
+	column OrganisationID
+		dataType: string
+		lineageTag: bb49c0bf-2aff-4bab-a429-3dbad2d6f731
+		summarizeBy: none
+		sourceColumn: OrganisationID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Code
+		dataType: string
+		lineageTag: cdafa94e-7f25-44a4-bef9-a255ce90cf34
+		summarizeBy: none
+		sourceColumn: Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: string
+		lineageTag: 484711c5-52f0-49fb-b724-096da43b8307
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column UNLOCO
+		dataType: string
+		lineageTag: 38cbf47e-7584-456f-b33d-18cffed20825
+		summarizeBy: none
+		sourceColumn: UNLOCO
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreateDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: adbadc55-5c15-4495-9541-dc72a077d957
+		summarizeBy: none
+		sourceColumn: CreateDate
+
+		variation Variation
+			isDefault
+			relationship: cc5a8433-b5dd-46a9-b2c9-8b690b09c02b
+			defaultHierarchy: LocalDateTable_fe05d96c-30c7-43fa-bbb4-f4bbb2c24903.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreateUser
+		dataType: string
+		lineageTag: 7fa6287e-d3ef-4679-9597-699397d471e2
+		summarizeBy: none
+		sourceColumn: CreateUser
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsForwarder
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 26896d7c-46c9-4c05-8f92-c0d7d95c04ef
+		summarizeBy: none
+		sourceColumn: IsForwarder
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsWarehouseClient
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: b0926992-5d79-4ce6-b1fc-610469a9e337
+		summarizeBy: none
+		sourceColumn: IsWarehouseClient
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsShippingProvider
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 61d2bb69-de2f-420a-b443-3598dccb75d6
+		summarizeBy: none
+		sourceColumn: IsShippingProvider
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsBroker
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: ad2968d0-231e-4af5-b938-eb2bb087489f
+		summarizeBy: none
+		sourceColumn: IsBroker
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsServices
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 3eb61d9f-48e0-4dbd-bf57-795a96686c6d
+		summarizeBy: none
+		sourceColumn: IsServices
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsCompetitor
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 37b08686-c4b8-42f9-8b86-96aa2df64349
+		summarizeBy: none
+		sourceColumn: IsCompetitor
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsSales
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e97be681-837a-4449-be41-e316de4dfbeb
+		summarizeBy: none
+		sourceColumn: IsSales
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsConsignor
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 93752391-4a8e-441f-b6e2-1a2ebf4b5a12
+		summarizeBy: none
+		sourceColumn: IsConsignor
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsConsignee
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 08282973-35f8-47fb-a009-0574c1148787
+		summarizeBy: none
+		sourceColumn: IsConsignee
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsTransportClient
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 08f47eb6-aafa-4852-a496-979caffd6398
+		summarizeBy: none
+		sourceColumn: IsTransportClient
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsControllingCustomer
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 1dcc0190-eed8-4b7d-9df3-dc9824793753
+		summarizeBy: none
+		sourceColumn: IsControllingCustomer
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsControllingAgent
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 8665fcf2-7cbd-412b-895b-0edc7aae1ee8
+		summarizeBy: none
+		sourceColumn: IsControllingAgent
+
+		annotation SummarizationSetBy = Automatic
+
+	column CarrierCategory
+		dataType: string
+		lineageTag: c430366e-da0b-4ce2-b51a-8152f4eab039
+		summarizeBy: none
+		sourceColumn: CarrierCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column FWAgentCategory
+		dataType: string
+		lineageTag: ad6e4718-3424-4bf6-8b85-2d6aad0f2fd3
+		summarizeBy: none
+		sourceColumn: FWAgentCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsAirLine
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 5423a63f-966a-43fd-bccd-85765227b3fc
+		summarizeBy: none
+		sourceColumn: IsAirLine
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsAirWholesaler
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: c5e83009-8948-4424-a361-412d44d813ea
+		summarizeBy: none
+		sourceColumn: IsAirWholesaler
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsShippingLine
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 2771cd2f-4f21-4af3-baf4-d977a3895bd7
+		summarizeBy: none
+		sourceColumn: IsShippingLine
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsShippingConsortium
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 0ea774fe-f79a-4001-b8e7-90c37888adc7
+		summarizeBy: none
+		sourceColumn: IsShippingConsortium
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsSeaWholesaler
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 01355873-2c39-4632-bdd5-1bf7499c01b8
+		summarizeBy: none
+		sourceColumn: IsSeaWholesaler
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsLocalTransport
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: a95fb534-9715-4aca-b2b2-142c0bd2811f
+		summarizeBy: none
+		sourceColumn: IsLocalTransport
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsLineHaulProvider
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 6e701ba5-10f6-40a1-ad16-b85fb22fd260
+		summarizeBy: none
+		sourceColumn: IsLineHaulProvider
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsRailProvider
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: f6cd7e30-236c-4340-9c2b-93ebf7330355
+		summarizeBy: none
+		sourceColumn: IsRailProvider
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsInlandWaterwayProvider
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: ace3439b-68ab-4170-9f65-8e559a8a99e5
+		summarizeBy: none
+		sourceColumn: IsInlandWaterwayProvider
+
+		annotation SummarizationSetBy = Automatic
+
+	column AddressID
+		dataType: string
+		lineageTag: 85ee1b2a-b537-4271-bf4d-2b4d01d41b0d
+		summarizeBy: none
+		sourceColumn: AddressID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Address1
+		dataType: string
+		lineageTag: 0ca6ce79-7e41-47a7-aded-4eda93b6567b
+		summarizeBy: none
+		sourceColumn: Address1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Address2
+		dataType: string
+		lineageTag: 257caa3d-7dc3-4398-8a60-06e6164b7f88
+		summarizeBy: none
+		sourceColumn: Address2
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		lineageTag: 5748c91b-9eaf-4cc2-946c-d8054d89d86f
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column PostCode
+		dataType: string
+		lineageTag: 2b791faf-3d95-40f2-bb38-872f595081f4
+		summarizeBy: none
+		sourceColumn: PostCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 817f3cc7-4393-4f31-949e-877f5e8ba8ed
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmailDomain
+		dataType: string
+		lineageTag: bb9c9422-6e86-4def-b3e6-6bea5390ca0d
+		summarizeBy: none
+		sourceColumn: EmailDomain
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchID
+		dataType: string
+		lineageTag: db588f48-8aec-47fe-b6e6-5067f1a2ae65
+		summarizeBy: none
+		sourceColumn: BranchID
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsDebtor
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 7caaed6f-5e9a-468f-a117-58ff60be6dc3
+		summarizeBy: none
+		sourceColumn: IsDebtor
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsCreditor
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 83bcac5d-fe79-4fa2-99cd-d14fadca6fe0
+		summarizeBy: none
+		sourceColumn: IsCreditor
+
+		annotation SummarizationSetBy = Automatic
+
+	column RegNumVAT
+		dataType: string
+		lineageTag: d1014f1d-51aa-4e87-a735-9d1d5cb86dd5
+		summarizeBy: none
+		sourceColumn: RegNumVAT
+
+		annotation SummarizationSetBy = Automatic
+
+	column RegNumCNO
+		dataType: string
+		lineageTag: 09c7fb49-e8e4-4da6-8d7c-171a3f2b1dcd
+		summarizeBy: none
+		sourceColumn: RegNumCNO
+
+		annotation SummarizationSetBy = Automatic
+
+	column Active
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 672f97ae-d4bb-4975-a41b-a7f6fc4647b9
+		summarizeBy: none
+		sourceColumn: Active
+
+		annotation SummarizationSetBy = Automatic
+
+	partition organisations = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jack.Chesney\OneDrive - X-pand\Microsoft Fabric\BI\Excel tables\Master_Data.xlsx"), null, true),
+				    organisations_Sheet = Source{[Item="organisations",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(organisations_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"OrganisationID", type text}, {"Code", type text}, {"Name", type text}, {"UNLOCO", type text}, {"CreateDate", type datetime}, {"CreateUser", type text}, {"IsForwarder", type logical}, {"IsWarehouseClient", type logical}, {"IsShippingProvider", type logical}, {"IsBroker", type logical}, {"IsServices", type logical}, {"IsCompetitor", type logical}, {"IsSales", type logical}, {"IsConsignor", type logical}, {"IsConsignee", type logical}, {"IsTransportClient", type logical}, {"IsControllingCustomer", type logical}, {"IsControllingAgent", type logical}, {"CarrierCategory", type text}, {"FWAgentCategory", type text}, {"IsAirLine", type logical}, {"IsAirWholesaler", type logical}, {"IsShippingLine", type logical}, {"IsShippingConsortium", type logical}, {"IsSeaWholesaler", type logical}, {"IsLocalTransport", type logical}, {"IsLineHaulProvider", type logical}, {"IsRailProvider", type logical}, {"IsInlandWaterwayProvider", type logical}, {"AddressID", type text}, {"Address1", type text}, {"Address2", type text}, {"City", type text}, {"PostCode", type text}, {"Country", type text}, {"EmailDomain", type text}, {"BranchID", type text}, {"IsDebtor", type logical}, {"IsCreditor", type logical}, {"RegNumVAT", type text}, {"RegNumCNO", type text}, {"Active", type logical}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

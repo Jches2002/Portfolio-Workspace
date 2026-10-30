@@ -283,6 +283,29 @@
         }
       ]
     },
+    "syncGroup": {
+      "groupName": "Calendar Year",
+      "fieldChanges": true,
+      "filterChanges": true
+    },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "8535a9f4cc7c4c00e76d",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Dates"
+              }
+            },
+            "Property": "Calendar Year"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

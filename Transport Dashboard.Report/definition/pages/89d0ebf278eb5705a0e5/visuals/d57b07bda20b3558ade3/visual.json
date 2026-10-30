@@ -294,6 +294,29 @@
         }
       ]
     },
+    "syncGroup": {
+      "groupName": "Branch",
+      "fieldChanges": true,
+      "filterChanges": true
+    },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "bc8ed43258156944a46e",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Branch"
+              }
+            },
+            "Property": "Branch"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
   }
 }

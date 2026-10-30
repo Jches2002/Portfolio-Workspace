@@ -1,0 +1,561 @@
+table ActivityMerged
+	lineageTag: 3338e189-e51f-4ef7-b174-0d0d6df99f84
+
+	measure 'Capacity %' =
+			
+			DIVIDE(
+			    SUM(ActivityMerged[Total Active]),
+			SUM(ActivityMerged[Contract Mins ]),
+			    0
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 3a7ba409-a91e-4b32-afe0-0c466acf95b7
+
+	measure 'Total Active M' = [Total Active CW & 365] + [Training minutes]
+		formatString: 0.00
+		lineageTag: 504d3b20-288b-4df2-83f1-fe1300fadd7f
+
+	measure 'Total Active CW & 365' = SUM(ActivityMerged[Total Active])
+		formatString: 0.00
+		lineageTag: cfad713e-e7f4-4e0b-8e6a-5a935411830e
+
+	measure 'Training minutes' = [Training hours] * 60
+		lineageTag: d9211364-a8d0-47a4-98e2-a81420538262
+
+	measure 'Training hours' = [Training Days] * 7.5
+		formatString: 0.00
+		lineageTag: 1636539b-d76e-4cc9-b036-16e3f809ebc7
+
+	measure 'Training Days' =
+			
+			CALCULATE(
+			    SUM(EmployeeLeave[Duration _Days_]),
+			    EmployeeLeave[Type] = "Training"
+			)
+		formatString: 0
+		lineageTag: 46f7938a-03e9-406d-ac42-5477717b23c4
+
+	measure 'Contracted Daily Hours' =
+			
+			DIVIDE(
+			    MAX(PeopleHR_Staff[Contracted Hours]),
+			    5
+			)
+		formatString: 0.00
+		lineageTag: 1f40ca4a-45f5-4451-8880-10312146dd59
+
+	measure 'Contracted hours M' = SUM(PeopleHR_Staff[Contracted Hours])
+		formatString: 0.00
+		lineageTag: 30a94475-547b-46d9-bf2d-847c6afbbb4e
+
+	measure 'Contracted Minutes' = [Contracted Daily Hours] * 60
+		formatString: 0.00
+		lineageTag: 238c6b69-2319-4360-b354-086d4736ea35
+
+	measure 'Total Contracted Minutes' =
+			
+			450 * ([Working Days Viva] - [Leave Duration])
+		formatString: 0
+		lineageTag: 3a23a01d-9cf1-4cd7-b4b4-0b95e70639d5
+
+	measure 'Working Days Viva' =
+			
+			CALCULATE(
+			    COUNTROWS(DatesViva),
+			    DatesViva[Bank Holiday] = 0,
+			    NOT (DatesViva[Day] IN {6, 7})
+			)
+		formatString: 0
+		lineageTag: 28926b71-0f41-4f9c-8afc-33872843e2af
+
+	measure 'Leave Duration' =
+			
+			CALCULATE(
+			    SUM(EmployeeLeave[Duration _Days_]),
+			    EmployeeLeave[Type] <> "Training"
+			)
+		formatString: 0
+		lineageTag: a9ed034e-12ba-4558-996f-103f79635adf
+
+	measure 'Average Total Active (hh:mm)' =
+			
+			VAR HoursValue = [Avg Active Hours per Person-Day]
+			RETURN
+			FORMAT(HoursValue / 24, "hh:mm")
+		lineageTag: 004287a2-6326-4177-8bfe-90db63f82130
+
+	measure 'Avg Active Hours per Person-Day' =
+			
+			VAR PersonDays =
+			    SUMX(
+			        VALUES('PeopleHR_Staff'[FullName]),
+			        VAR AvailDays = [Working Days Viva] - [Leave Duration]
+			        RETURN AvailDays
+			    )
+			RETURN
+			DIVIDE( [Total Active M], PersonDays ) / 60
+		lineageTag: b5329cf2-3c74-4abe-b83b-5413217adc7c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Active CW (d hh:mm)' = VAR HoursValue = SUM(ActivityMerged[TotalActiveTimeMinutesCW]) VAR Days = INT(HoursValue / 24) VAR RemainingHours = HoursValue - (Days * 24) VAR Hours = INT(RemainingHours) VAR Minutes = (RemainingHours - Hours) * 60 RETURN Days & "d " & FORMAT(Hours, "00") & ":" & FORMAT(Minutes, "00")
+		lineageTag: d341009e-5ae0-4c71-b35d-44179a182e04
+
+	measure 'Total Active CW Hours' = DIVIDE([Total Cargowise Active],60)
+		lineageTag: 51b70507-bc53-4431-b9f3-f6d72f951dff
+
+	measure 'Total Cargowise Active' = SUM(ActivityMerged[TotalActiveTimeMinutesCW])
+		lineageTag: 2dd5e75f-3f75-4ad5-b5cb-a2a6817cf2a4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Total 365 Active (hh:mm)' =
+			
+			VAR HoursValue = [Avg Active Hours per Person-Day 365]
+			RETURN
+			FORMAT(HoursValue / 24, "hh:mm")
+		lineageTag: 28fa207e-cd9b-4275-8452-17b158887d48
+
+	measure 'Avg Active Hours per Person-Day 365' =
+			
+			VAR PersonDays =
+			    SUMX(
+			        VALUES('PeopleHR_Staff'[FullName]),
+			        VAR AvailDays = [Working Days Viva] - [Leave Duration]
+			        RETURN AvailDays
+			    )
+			RETURN
+			DIVIDE( [Total 365 Active], PersonDays ) / 60
+		lineageTag: 10f01122-af43-48a8-8b1d-8349df82cab9
+
+	measure 'Total 365 Active' = SUM(ActivityMerged[Collaboration Minutes])
+		lineageTag: 8ab677f3-b7c2-423a-8f1e-30b3252b2803
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Total CW Active (hh:mm)' =
+			
+			VAR HoursValue = [Avg Active Hours per Person-Day CW]
+			RETURN
+			FORMAT(HoursValue / 24, "hh:mm")
+		lineageTag: d4349adc-5197-4521-84a7-ca371d8eac54
+
+	measure 'Avg Active Hours per Person-Day CW' =
+			
+			VAR PersonDays =
+			    SUMX(
+			        VALUES('PeopleHR_Staff'[FullName]),
+			        VAR AvailDays = [Working Days Viva] - [Leave Duration]
+			        RETURN AvailDays
+			    )
+			RETURN
+			DIVIDE( [Total Cargowise Active], PersonDays ) / 60
+		lineageTag: caf1eaac-d355-4ede-8602-164867be3bb1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total 365 Active (d hh:mm)' = ```
+			
+			VAR HoursValue = [Total Active 365 Hours]
+			
+			VAR Days = INT(HoursValue / 24)
+			VAR RemainingHours = HoursValue - (Days * 24)
+			
+			VAR Hours = INT(RemainingHours)
+			VAR Minutes = (RemainingHours - Hours) * 60
+			
+			RETURN
+			Days & "d " &
+			FORMAT(Hours, "00") & ":" &
+			FORMAT(Minutes, "00")
+			
+			```
+		lineageTag: 37a6dbba-d63e-4e95-af2b-feb4f8302aae
+
+	measure 'Total Active 365 Hours' = DIVIDE([Total 365 Active],60)
+		lineageTag: 4765c038-f70f-44db-a6d5-b7f0eba10397
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Chat time (d hh:mm)' = ```
+			
+			VAR HoursValue = [Chat hours]
+			
+			VAR Days = INT(HoursValue / 24)
+			VAR RemainingHours = HoursValue - (Days * 24)
+			
+			VAR Hours = INT(RemainingHours)
+			VAR Minutes = (RemainingHours - Hours) * 60
+			
+			RETURN
+			Days & "d " &
+			FORMAT(Hours, "00") & ":" &
+			FORMAT(Minutes, "00")
+			
+			```
+		lineageTag: 15f1a04c-9475-42d9-bbce-6935f91cdfa7
+
+	measure 'Chat hours' = DIVIDE([Chat minutes m], 60)
+		lineageTag: 32d306da-f3e1-46dd-be38-8ca48a264ae8
+
+	measure 'Chat minutes m' = SUM(ActivityMerged[Chat Minutes])
+		lineageTag: 1459d2e0-4fd1-442f-afb8-dbcb64d30564
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Email Time (d hh:mm)' = ```
+			
+			VAR HoursValue = [Email hours]
+			
+			VAR Days = INT(HoursValue / 24)
+			VAR RemainingHours = HoursValue - (Days * 24)
+			
+			VAR Hours = INT(RemainingHours)
+			VAR Minutes = (RemainingHours - Hours) * 60
+			
+			RETURN
+			Days & "d " &
+			FORMAT(Hours, "00") & ":" &
+			FORMAT(Minutes, "00")
+			
+			```
+		lineageTag: 0d754136-07c2-4ceb-acd0-a985058437ec
+
+	measure 'Email Time M' = SUM(ActivityMerged[Email Minutes])
+		lineageTag: 675256e6-bb85-498c-8244-1c4d040f4a9c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Email hours' = DIVIDE([Email Time M], 60)
+		lineageTag: 468546db-0854-4f74-961f-c95efa04aa9a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Call Hours' = DIVIDE([Call Minutes M],60)
+		lineageTag: 46d5d2e7-a265-4a6b-8b6a-9381f8d484db
+
+	measure 'Call Minutes M' = SUM(ActivityMerged[Meeting and call Minutes])
+		formatString: 0
+		lineageTag: edba2baf-d279-470c-ab0c-65309af44875
+
+	measure 'Total Call time (d hh:mm)' = ```
+			
+			VAR HoursValue = [Call Hours]
+			
+			VAR Days = INT(HoursValue / 24)
+			VAR RemainingHours = HoursValue - (Days * 24)
+			
+			VAR Hours = INT(RemainingHours)
+			VAR Minutes = (RemainingHours - Hours) * 60
+			
+			RETURN
+			Days & "d " &
+			FORMAT(Hours, "00") & ":" &
+			FORMAT(Minutes, "00")
+			
+			```
+		lineageTag: dfcd651b-38ce-44dc-b4ae-1ce2c5b08619
+
+	measure 'Average Total Active' =
+			
+			AVERAGEX(
+			    VALUES(PeopleHR_Staff[FullName]),
+			    DIVIDE(
+			        [Total Active M],
+			        [Working Days Viva] - [Leave Duration]
+			    )
+			)
+		lineageTag: f9555071-b4ea-44b6-9572-e484b77055af
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Total Active Hours' = ```
+			
+			AVERAGEX(
+			    VALUES(PeopleHR_Staff[FullName]),
+			    DIVIDE(
+			        [Total Active CW & 365],
+			        [Working Days Viva] - [Leave Duration]
+			    ) / 60
+			)
+			
+			```
+		lineageTag: 1abfec9a-a115-4347-961e-5673754a80b9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Active Minutes Per Day' =
+			
+			DIVIDE(
+			    [Total Active CW & 365],
+			    [Working Days Viva] - [Leave Duration]
+			)
+		lineageTag: e786527a-8ccb-4fa5-8e57-10481da52677
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Contracted Minutes Test' =
+			
+			[Contracted Minutes]
+			*
+			([Working Days Viva] - [Leave Duration])
+		lineageTag: 80d3bfbd-2c12-4f4c-991a-5c22831eae85
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Capacity Colour' =
+			
+			SWITCH(
+			    TRUE(),
+			    [Capacity %] < 0.5, "#DC2626",
+			    [Capacity %] < 0.75, "#F59E0B",
+			    "#16A34A"
+			)
+		lineageTag: 53a422e8-fd36-4068-b21a-bc7f8ae8a227
+
+	measure 'Average Active' =
+			
+			AVERAGE('ActivityMerged'[Total Active])
+		lineageTag: 246070e5-4104-4a2d-a327-e35ef436bdea
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Active HHMM' =
+			
+			VAR AvgMinutes = AVERAGE('ActivityMerged'[Total Active])
+			VAR Hours = INT(AvgMinutes / 60)
+			VAR Minutes = MOD(ROUND(AvgMinutes, 0), 60)
+			RETURN
+			    FORMAT(Hours, "00") & ":" & FORMAT(Minutes, "00")
+		lineageTag: 801359e8-f311-4fa5-8407-77440a730d3f
+
+	measure 'Average Active MS' =
+			
+			AVERAGE('ActivityMerged'[Active Minutes 365])
+		lineageTag: 9e2f200b-89dc-41ae-9270-7755c4afe73c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Active MS HHMM' =
+			
+			VAR AvgMinutes = AVERAGE('ActivityMerged'[Active Minutes 365])
+			VAR Hours = INT(AvgMinutes / 60)
+			VAR Minutes = MOD(ROUND(AvgMinutes, 0), 60)
+			RETURN
+			    FORMAT(Hours, "00") & ":" & FORMAT(Minutes, "00")
+		lineageTag: 7bd5cc08-0ded-4712-8b36-144a408915a9
+
+	measure 'Average Active APP HHMM' =
+			
+			VAR AvgMinutes = AVERAGE('ActivityMerged'[TotalActiveTimeMinutesCW])
+			VAR Hours = INT(AvgMinutes / 60)
+			VAR Minutes = MOD(ROUND(AvgMinutes, 0), 60)
+			RETURN
+			    FORMAT(Hours, "00") & ":" & FORMAT(Minutes, "00")
+		lineageTag: fbb504be-616f-4ad1-85e2-5cf0d2fd44ba
+
+	column Date
+		dataType: dateTime
+		formatString: dd mmmm yyyy
+		lineageTag: 64e35584-2b02-43e5-9147-90f6a792bba3
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Attended meetings'
+		dataType: int64
+		formatString: 0
+		lineageTag: c403a064-1f57-4293-aa06-42325ca97261
+		summarizeBy: sum
+		sourceColumn: Attended meetings
+
+		annotation SummarizationSetBy = Automatic
+
+	column Calls
+		dataType: int64
+		formatString: 0
+		lineageTag: 3071453b-311f-4d63-b6ec-4daeee1f81c3
+		summarizeBy: sum
+		sourceColumn: Calls
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Chats sent'
+		dataType: int64
+		formatString: 0
+		lineageTag: a98a39db-8685-4ad5-b2e3-d7b261290206
+		summarizeBy: sum
+		sourceColumn: Chats sent
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Emails sent'
+		dataType: int64
+		formatString: 0
+		lineageTag: e16ca8aa-3f2c-479e-9dee-ad79c83cad9d
+		summarizeBy: sum
+		sourceColumn: Emails sent
+
+		annotation SummarizationSetBy = Automatic
+
+	column Meetings
+		dataType: int64
+		formatString: 0
+		lineageTag: 58cd11ee-f94e-409f-8d2e-e228d943418c
+		summarizeBy: sum
+		sourceColumn: Meetings
+
+		annotation SummarizationSetBy = Automatic
+
+	column Email
+		dataType: string
+		lineageTag: 5a531f3a-e92e-4b93-910b-b10eae354eb0
+		summarizeBy: none
+		sourceColumn: Email
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Active Minutes 365'
+		dataType: double
+		lineageTag: 10117181-51ec-4595-b10e-ed015ba8dbd2
+		summarizeBy: sum
+		sourceColumn: Active Minutes 365
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Call Minutes'
+		dataType: int64
+		formatString: 0
+		lineageTag: f7327b65-a503-4c8e-bb0c-550891be76ed
+		summarizeBy: sum
+		sourceColumn: Call Minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Chat Minutes'
+		dataType: double
+		lineageTag: 50b0d31d-19c7-43e7-be45-1b1712cd4038
+		summarizeBy: sum
+		sourceColumn: Chat Minutes
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Meeting Minutes'
+		dataType: int64
+		formatString: 0
+		lineageTag: c04eaf8e-a154-43c1-93e1-f725eb5d0bb6
+		summarizeBy: sum
+		sourceColumn: Meeting Minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Meeting and call Minutes'
+		dataType: int64
+		formatString: 0
+		lineageTag: 66e2141e-a3fb-4549-8cef-32f0135ea4b6
+		summarizeBy: sum
+		sourceColumn: Meeting and call Minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Email Minutes'
+		dataType: double
+		lineageTag: aa09d9fa-2d47-4d5d-890f-ba2e395c10e8
+		summarizeBy: sum
+		sourceColumn: Email Minutes
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TotalControlChangesCW
+		dataType: int64
+		formatString: 0
+		lineageTag: 00c346ba-57fb-422b-be7f-25054914da1d
+		summarizeBy: sum
+		sourceColumn: TotalControlChangesCW
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalActiveTimeMinutesCW
+		dataType: double
+		lineageTag: b949eae0-cfb5-47e0-8756-8ab38f2b53ea
+		summarizeBy: sum
+		sourceColumn: TotalActiveTimeMinutesCW
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column '365 Actvity'
+		dataType: double
+		lineageTag: 36db1370-9d04-492a-925a-2e52d0fcf7fb
+		summarizeBy: sum
+		sourceColumn: 365 Actvity
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Collaboration Minutes'
+		dataType: double
+		lineageTag: 3181acf9-25a4-494e-a676-3794495e8fe6
+		summarizeBy: sum
+		sourceColumn: Collaboration Minutes
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Total Active'
+		dataType: double
+		lineageTag: 66ae1a9f-fd83-404d-a896-bb555af042a0
+		summarizeBy: sum
+		sourceColumn: Total Active
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Source
+		dataType: string
+		lineageTag: b625018c-d16d-4021-bf4f-126b1d790674
+		summarizeBy: none
+		sourceColumn: Source
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Contract Mins '
+		dataType: double
+		lineageTag: ea565358-7c65-4910-90f1-8895e5a054da
+		summarizeBy: sum
+		sourceColumn: "Contract Mins "
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition ActivityMerged = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jack.Chesney\OneDrive - X-pand\Microsoft Fabric\BI\Excel tables\Productivity_Data.xlsx"), null, true),
+				    ActivityMerged_Sheet = Source{[Item="ActivityMerged",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(ActivityMerged_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Date", type datetime}, {"Attended meetings", Int64.Type}, {"Calls", Int64.Type}, {"Chats sent", Int64.Type}, {"Emails sent", Int64.Type}, {"Meetings", Int64.Type}, {"Email", type text}, {"Active Minutes 365", type number}, {"Call Minutes", Int64.Type}, {"Chat Minutes", type number}, {"Meeting Minutes", Int64.Type}, {"Meeting and call Minutes", Int64.Type}, {"Email Minutes", type number}, {"TotalControlChangesCW", Int64.Type}, {"TotalActiveTimeMinutesCW", type number}, {"365 Actvity", type number}, {"Collaboration Minutes", type number}, {"Total Active", type number}, {"Source", type text}}),
+				    #"Added Custom" = Table.AddColumn(#"Changed Type", "Contract Mins ", each 450),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom",{{"Contract Mins ", type number}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

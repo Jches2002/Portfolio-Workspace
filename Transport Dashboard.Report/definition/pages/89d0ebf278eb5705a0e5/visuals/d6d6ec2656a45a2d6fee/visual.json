@@ -294,6 +294,29 @@
         }
       ]
     },
+    "syncGroup": {
+      "groupName": "Customer Name",
+      "fieldChanges": true,
+      "filterChanges": true
+    },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "94b4e1d7e85c46c5a604",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Customers"
+              }
+            },
+            "Property": "Customer Name"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
   }
 }

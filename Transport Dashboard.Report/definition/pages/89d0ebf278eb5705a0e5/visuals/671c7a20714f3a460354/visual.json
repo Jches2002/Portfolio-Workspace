@@ -294,6 +294,29 @@
         }
       ]
     },
+    "syncGroup": {
+      "groupName": "Department",
+      "fieldChanges": true,
+      "filterChanges": true
+    },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "a137f754664aa020380a",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Departments"
+              }
+            },
+            "Property": "Department"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
   }
 }

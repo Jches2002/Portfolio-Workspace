@@ -1,0 +1,228 @@
+table activitylog
+	lineageTag: ba977b92-67af-4ff8-a936-3004553344d4
+
+	column ActivityID
+		dataType: string
+		lineageTag: 421bba0c-4adf-4e33-b549-a334d3604988
+		summarizeBy: none
+		sourceColumn: ActivityID
+
+		annotation SummarizationSetBy = Automatic
+
+	column FormCaption
+		dataType: string
+		lineageTag: 7b11d106-3730-412e-aac6-93d3cc8755cd
+		summarizeBy: none
+		sourceColumn: FormCaption
+
+		annotation SummarizationSetBy = Automatic
+
+	column KeyStrokes
+		dataType: int64
+		formatString: 0
+		lineageTag: bbe01c04-bdf3-4977-bf8f-260a613ad44d
+		summarizeBy: sum
+		sourceColumn: KeyStrokes
+
+		annotation SummarizationSetBy = Automatic
+
+	column MouseClicks
+		dataType: int64
+		formatString: 0
+		lineageTag: f1edc956-4b89-4ff6-8520-b63479a8e424
+		summarizeBy: sum
+		sourceColumn: MouseClicks
+
+		annotation SummarizationSetBy = Automatic
+
+	column ControlChanges
+		dataType: int64
+		formatString: 0
+		lineageTag: aff11960-2430-41e7-8ac5-98ddf24f9397
+		summarizeBy: sum
+		sourceColumn: ControlChanges
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActiveTimeMinutes
+		dataType: double
+		lineageTag: 7b0e8496-373d-4a6a-b23a-7d07c1a70cab
+		summarizeBy: sum
+		sourceColumn: ActiveTimeMinutes
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column InactiveTimeMinutes
+		dataType: double
+		lineageTag: 93adf63c-d9bb-4455-bdd3-80099d132d57
+		summarizeBy: sum
+		sourceColumn: InactiveTimeMinutes
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TotalTimeMinutes
+		dataType: double
+		lineageTag: 36cdcab6-9d8b-4aec-9b54-bac3d8251948
+		summarizeBy: sum
+		sourceColumn: TotalTimeMinutes
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OpenDateTime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 09e2d4ea-ff9d-4a74-baaf-6a775bbbf3e1
+		summarizeBy: none
+		sourceColumn: OpenDateTime
+
+		variation Variation
+			isDefault
+			relationship: 29971197-33d5-4c56-92c6-124db74a72e7
+			defaultHierarchy: LocalDateTable_84e918e6-5ab0-40b4-8c81-09e81ffdfda4.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreateDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f9255250-bf51-488b-ab79-f6781e21545e
+		summarizeBy: none
+		sourceColumn: CreateDate
+
+		variation Variation
+			isDefault
+			relationship: 9668a684-299d-4bc3-a244-9625fd9d03ea
+			defaultHierarchy: LocalDateTable_55824443-e9e5-4d75-aa53-86ab53769d73.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column CloseDateTime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d0f60934-42cb-45c8-9cb2-3c93ea14455f
+		summarizeBy: none
+		sourceColumn: CloseDateTime
+
+		variation Variation
+			isDefault
+			relationship: ff0ec42c-c1fc-4a15-9812-b2325d561170
+			defaultHierarchy: LocalDateTable_5e602f3f-dc37-4b6e-ae3a-4525aa08a150.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreateUser
+		dataType: string
+		lineageTag: 85efbf95-e803-4787-b1e4-bab540532971
+		summarizeBy: none
+		sourceColumn: CreateUser
+
+		annotation SummarizationSetBy = Automatic
+
+	column ParentID
+		dataType: string
+		lineageTag: 25b928e0-6b63-487d-91f5-1cc990d9b53f
+		summarizeBy: none
+		sourceColumn: ParentID
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrganisationID
+		dataType: string
+		lineageTag: d2e6ce5b-1b50-4282-a89c-505ee64991a2
+		summarizeBy: none
+		sourceColumn: OrganisationID
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchID
+		dataType: string
+		lineageTag: d934e21a-0ee0-4e15-aac8-5a7dd3e9c8b4
+		summarizeBy: none
+		sourceColumn: BranchID
+
+		annotation SummarizationSetBy = Automatic
+
+	column DepartmentID
+		dataType: string
+		lineageTag: 72ccc8b0-a0e5-42b3-9870-6d9e4a08630c
+		summarizeBy: none
+		sourceColumn: DepartmentID
+
+		annotation SummarizationSetBy = Automatic
+
+	column JobType
+		dataType: string
+		lineageTag: a830a4ec-d871-4130-b600-8be08dc17aa0
+		summarizeBy: none
+		sourceColumn: JobType
+
+		annotation SummarizationSetBy = Automatic
+
+	column BenchmarkHeader
+		dataType: string
+		lineageTag: ca3b174b-6c45-4a02-8896-c3ce2beb73e6
+		summarizeBy: none
+		sourceColumn: BenchmarkHeader
+
+		annotation SummarizationSetBy = Automatic
+
+	column OpenHour
+		dataType: int64
+		formatString: 0
+		lineageTag: d5e6f458-631d-496c-b9b5-2ca14d24b8fd
+		summarizeBy: sum
+		sourceColumn: OpenHour
+
+		annotation SummarizationSetBy = Automatic
+
+	column RevenueRecognizedDateYYYYMM
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: f16571ef-3f23-4406-a8cd-eb2c45e0d353
+		summarizeBy: none
+		sourceColumn: RevenueRecognizedDateYYYYMM
+
+		variation Variation
+			isDefault
+			relationship: 82d51d52-dfd3-4d7d-9536-dec8d182cdec
+			defaultHierarchy: LocalDateTable_64bf318f-6009-47b3-ac5b-613fc1090d21.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column RecognitionDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 3a09a3d9-d6e2-415f-a64d-b117663e64b2
+		summarizeBy: none
+		sourceColumn: RecognitionDate
+
+		variation Variation
+			isDefault
+			relationship: 65f5779d-3cd4-4c36-a736-177f7aefa84b
+			defaultHierarchy: LocalDateTable_89446737-0e50-4baf-a26b-3200f42ff858.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition activitylog = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jack.Chesney\OneDrive - X-pand\Microsoft Fabric\BI\Excel tables\Operations_Data.xlsx"), null, true),
+				    activitylog_Sheet = Source{[Item="activitylog",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(activitylog_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"ActivityID", type text}, {"FormCaption", type text}, {"KeyStrokes", Int64.Type}, {"MouseClicks", Int64.Type}, {"ControlChanges", Int64.Type}, {"ActiveTimeMinutes", type number}, {"InactiveTimeMinutes", type number}, {"TotalTimeMinutes", type number}, {"OpenDateTime", type datetime}, {"CreateDate", type datetime}, {"CloseDateTime", type datetime}, {"CreateUser", type text}, {"ParentID", type text}, {"OrganisationID", type text}, {"BranchID", type text}, {"DepartmentID", type text}, {"JobType", type text}, {"BenchmarkHeader", type text}, {"OpenHour", Int64.Type}, {"RevenueRecognizedDateYYYYMM", type date}, {"RecognitionDate", type datetime}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

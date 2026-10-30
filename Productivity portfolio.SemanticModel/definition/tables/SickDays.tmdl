@@ -1,0 +1,127 @@
+table SickDays
+	lineageTag: ccfa5200-8d41-4d06-b7a1-83d3c3e7bcb2
+
+	column 'Employee Id'
+		dataType: string
+		lineageTag: bef60117-0076-4127-8f15-ae9f7fb5b612
+		summarizeBy: none
+		sourceColumn: Employee Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'First Name'
+		dataType: string
+		lineageTag: 51424ddf-b087-4470-8223-e6e9d1d0a9ab
+		summarizeBy: none
+		sourceColumn: First Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Name'
+		dataType: string
+		lineageTag: 1848a10e-c52c-498c-9fd5-09b4514070e9
+		summarizeBy: none
+		sourceColumn: Last Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Work Email'
+		dataType: string
+		lineageTag: 24842699-ed28-492e-91b6-f1d02541b2ce
+		summarizeBy: none
+		sourceColumn: Work Email
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Full Time Working Hours'
+		dataType: double
+		lineageTag: 7085a34f-8a43-4518-aaf2-21cd10aa5dec
+		summarizeBy: sum
+		sourceColumn: Full Time Working Hours
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Sick Start Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f5563138-fa90-4b84-aa84-3a745c173c6b
+		summarizeBy: none
+		sourceColumn: Sick Start Date
+
+		variation Variation
+			isDefault
+			relationship: b3bc0f28-fb73-4c32-92a3-4ed36a9e1a14
+			defaultHierarchy: LocalDateTable_7bdfb120-15b0-4b69-8ad7-e15fd8f8eb69.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sick End Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d55549b6-285d-44c5-8cb1-3909efd4ca36
+		summarizeBy: none
+		sourceColumn: Sick End Date
+
+		variation Variation
+			isDefault
+			relationship: 8dc54d97-e3c2-49cf-970a-b282ea4c19d0
+			defaultHierarchy: LocalDateTable_2954d640-d01c-4a8f-a4c3-e41d17ea5829.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column SickEndAdd
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 7323ff93-1c84-4eca-8399-2a8d32ce8af2
+		summarizeBy: none
+		sourceColumn: SickEndAdd
+
+		variation Variation
+			isDefault
+			relationship: 599e5565-515d-4db4-bd55-9e03dea9d22f
+			defaultHierarchy: LocalDateTable_4ab9f155-79ec-4ff7-ada6-59f5c85b9528.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Sick Reason'
+		dataType: string
+		lineageTag: 4e4a3fb6-85d1-41fa-9845-2b947ea5fef8
+		summarizeBy: none
+		sourceColumn: Sick Reason
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sick Duration _Days_'
+		dataType: int64
+		formatString: 0
+		lineageTag: 105e8570-628d-4c98-9ec8-73ecc49cae15
+		summarizeBy: sum
+		sourceColumn: Sick Duration _Days_
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Full Name'
+		dataType: string
+		lineageTag: ce1d5a37-e975-43c1-9d77-5f26f21731ad
+		summarizeBy: none
+		sourceColumn: Full Name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition SickDays = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jack.Chesney\OneDrive - X-pand\Microsoft Fabric\BI\Excel tables\Productivity_Data.xlsx"), null, true),
+				    SickDays_Sheet = Source{[Item="SickDays",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(SickDays_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Employee Id", type text}, {"First Name", type text}, {"Last Name", type text}, {"Work Email", type text}, {"Full Time Working Hours", type number}, {"Sick Start Date", type datetime}, {"Sick End Date", type datetime}, {"SickEndAdd", type date}, {"Sick Reason", type text}, {"Sick Duration _Days_", Int64.Type}, {"Full Name", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,121 @@
+table employees
+	lineageTag: 226a94f5-fdc5-4021-b917-38767659c98a
+
+	column EmployeeID
+		dataType: string
+		lineageTag: f4047f56-e834-4705-8474-a98225c22c55
+		summarizeBy: none
+		sourceColumn: EmployeeID
+
+		annotation SummarizationSetBy = Automatic
+
+	column LoginName
+		dataType: string
+		lineageTag: 642e3eef-df15-4f58-8f8b-5bf24e4ac5da
+		summarizeBy: none
+		sourceColumn: LoginName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Code
+		dataType: string
+		lineageTag: d9f201b6-12bd-4bea-a983-8b5e2002a42a
+		summarizeBy: none
+		sourceColumn: Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: string
+		lineageTag: cc7caaf0-b6fd-4db7-97bf-0728603d3d29
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmailAddress
+		dataType: string
+		lineageTag: 5e11a43c-b9f1-4a60-b9b1-099cc157fadc
+		summarizeBy: none
+		sourceColumn: EmailAddress
+
+		annotation SummarizationSetBy = Automatic
+
+	column Title
+		dataType: string
+		lineageTag: f229624c-c8ec-47a4-910a-79e024f74370
+		summarizeBy: none
+		sourceColumn: Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchID
+		dataType: string
+		lineageTag: eaf17a5b-054e-4bc1-b709-072a85d0b8f9
+		summarizeBy: none
+		sourceColumn: BranchID
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchCode
+		dataType: string
+		lineageTag: d75c8e13-e671-42ee-bf7d-4dc057116847
+		summarizeBy: none
+		sourceColumn: BranchCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchName
+		dataType: string
+		lineageTag: 79f31ddf-5973-4814-9bbd-d8c2a6ccfed6
+		summarizeBy: none
+		sourceColumn: BranchName
+
+		annotation SummarizationSetBy = Automatic
+
+	column DepartmentID
+		dataType: string
+		lineageTag: 9a576b2e-2744-415b-8925-b8634cdc34d4
+		summarizeBy: none
+		sourceColumn: DepartmentID
+
+		annotation SummarizationSetBy = Automatic
+
+	column DepartmentCode
+		dataType: string
+		lineageTag: 3b702d33-6959-4c15-910f-bcd614bfcacc
+		summarizeBy: none
+		sourceColumn: DepartmentCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		lineageTag: 34dab09c-b40f-4912-95cc-3a1fb7fbacf5
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column Active
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 9b53c93a-35e1-42a9-a543-cf84f2b4f3a1
+		summarizeBy: none
+		sourceColumn: Active
+
+		annotation SummarizationSetBy = Automatic
+
+	partition employees = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jack.Chesney\OneDrive - X-pand\Microsoft Fabric\BI\Excel tables\Master_Data.xlsx"), null, true),
+				    employees_Sheet = Source{[Item="employees",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(employees_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"EmployeeID", type text}, {"LoginName", type text}, {"Code", type text}, {"Name", type text}, {"EmailAddress", type text}, {"Title", type text}, {"BranchID", type text}, {"BranchCode", type text}, {"BranchName", type text}, {"DepartmentID", type text}, {"DepartmentCode", type text}, {"Description", type text}, {"Active", type logical}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

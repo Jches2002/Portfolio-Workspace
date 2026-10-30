@@ -1,0 +1,186 @@
+table PeopleHR_Staff
+	lineageTag: b16e924f-91b9-49ee-9c00-eb19040b6dec
+
+	measure 'Contracted Hours Check' =
+			
+			MAX(PeopleHR_Staff[Contracted Hours])
+		lineageTag: 44fe2aae-d6a7-4585-8d10-8f3fd2ca3b35
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Avaliable working days' = PeopleHR_Staff[People Count Active] * [Working Days Future]
+		lineageTag: 45fdd4ce-e150-4edc-808e-078d223811e6
+
+	measure 'People Count Active' =
+			
+			VAR SelectedDate = MAX('FutureDates'[Date])
+			RETURN
+			CALCULATE(
+			    COUNT(PeopleHR_Staff[Employee Id]),
+			    FILTER(
+			        PeopleHR_Staff,
+			        PeopleHR_Staff[Start Date] <= SelectedDate &&
+			        (
+			            ISBLANK(PeopleHR_Staff[Final Day Employment]) ||
+			            PeopleHR_Staff[Final Day Employment] >= SelectedDate
+			        )
+			    )
+			)
+		formatString: 0
+		lineageTag: ce21e223-25be-468b-bd41-5597bebae38f
+
+	measure 'Working Days Future' = ```
+			
+			CALCULATE(
+			    COUNTROWS(FutureDates),
+			    FutureDates[Bank Holiday] = 0,
+			    NOT (FutureDates[Day] IN {6, 7})
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 34377d52-9f7f-4268-911a-90f317b83c5e
+
+	column 'Employee Id'
+		dataType: string
+		lineageTag: 10c5e6e5-9676-45ab-866d-256137370b08
+		summarizeBy: none
+		sourceColumn: Employee Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'First Name'
+		dataType: string
+		lineageTag: 06839947-69df-42e9-825d-aa54843707a8
+		summarizeBy: none
+		sourceColumn: First Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Name'
+		dataType: string
+		lineageTag: cfb6f3bf-217a-4567-afaf-97c195ea6772
+		summarizeBy: none
+		sourceColumn: Last Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column FullName
+		dataType: string
+		lineageTag: ee5fa7b2-bd6a-45c3-b8a5-8bc49b5d8abe
+		summarizeBy: none
+		sourceColumn: FullName
+
+		annotation SummarizationSetBy = Automatic
+
+	column NIS/SSN
+		dataType: string
+		lineageTag: df4708b7-8fdf-4a51-adcf-c269cc9301d0
+		summarizeBy: none
+		sourceColumn: NIS/SSN
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Work Email'
+		dataType: string
+		lineageTag: c4de0775-2619-4876-978a-3eb4dc803e93
+		summarizeBy: none
+		sourceColumn: Work Email
+
+		annotation SummarizationSetBy = Automatic
+
+	column Location
+		dataType: string
+		lineageTag: b9667330-455f-4f20-a7c1-26a827f8ec10
+		summarizeBy: none
+		sourceColumn: Location
+
+		annotation SummarizationSetBy = Automatic
+
+	column Department
+		dataType: string
+		lineageTag: 6dfe2007-8e02-4eb5-8318-32d52b03b666
+		summarizeBy: none
+		sourceColumn: Department
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Job Role'
+		dataType: string
+		lineageTag: 22058a26-a51b-4b96-a2b7-4575ef167eb4
+		summarizeBy: none
+		sourceColumn: Job Role
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Start Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8137c93c-f373-4e1d-baed-fbd059851958
+		summarizeBy: none
+		sourceColumn: Start Date
+
+		variation Variation
+			isDefault
+			relationship: 663c7fd1-bde7-4f6b-8435-e2f545ac2e0d
+			defaultHierarchy: LocalDateTable_ed498c10-a6de-4030-aa4f-564bc8318218.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Length Of Service'
+		dataType: double
+		lineageTag: 79dd5d10-8a7d-4111-8ba2-93b625894a4d
+		summarizeBy: sum
+		sourceColumn: Length Of Service
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Reports To'
+		dataType: string
+		lineageTag: 719378ff-6abd-4490-a0d6-aa0f9cde673b
+		summarizeBy: none
+		sourceColumn: Reports To
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Contracted Hours'
+		dataType: double
+		lineageTag: 39040ef2-6104-4452-b965-893891fdd412
+		summarizeBy: sum
+		sourceColumn: Contracted Hours
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Final Day Employment'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 91edccd3-4444-45fa-888c-401db72a4a81
+		summarizeBy: none
+		sourceColumn: Final Day Employment
+
+		variation Variation
+			isDefault
+			relationship: e2545326-24a6-41f0-81f2-18a35e1bffe2
+			defaultHierarchy: LocalDateTable_60d9ede2-06fe-446a-b355-c5a080b3c714.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition PeopleHR_Staff = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jack.Chesney\OneDrive - X-pand\Microsoft Fabric\BI\Excel tables\Productivity_Data.xlsx"), null, true),
+				    PeopleHR_Staff_Sheet = Source{[Item="PeopleHR_Staff",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(PeopleHR_Staff_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Employee Id", type text}, {"First Name", type text}, {"Last Name", type text}, {"FullName", type text}, {"NIS/SSN", type text}, {"Work Email", type text}, {"Location", type text}, {"Department", type text}, {"Job Role", type text}, {"Start Date", type datetime}, {"Length Of Service", type number}, {"Reports To", type text}, {"Contracted Hours", type number}, {"Final Day Employment", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

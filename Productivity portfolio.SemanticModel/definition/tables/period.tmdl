@@ -1,0 +1,151 @@
+table period
+	lineageTag: 1095adea-ccdc-45ad-b4be-56673d690865
+
+	column PeriodID
+		dataType: string
+		lineageTag: 182a6f2e-6daa-4cca-be3b-1d6484ec9df2
+		summarizeBy: none
+		sourceColumn: PeriodID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Period
+		dataType: int64
+		formatString: 0
+		lineageTag: 74436564-8cf2-49c0-9663-5fe3fce3ce71
+		summarizeBy: none
+		sourceColumn: Period
+
+		annotation SummarizationSetBy = Automatic
+
+	column PeriodYear
+		dataType: int64
+		formatString: 0
+		lineageTag: 66cf03a6-7a91-47c3-99be-77137040a723
+		summarizeBy: sum
+		sourceColumn: PeriodYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: de730fcc-73df-48c1-9147-1d66958ebc88
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: string
+		lineageTag: 95ef25bc-e827-439f-8870-62d951604adc
+		summarizeBy: none
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearMonth
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: effbe811-3573-4b24-881a-93bbd5bdd8bd
+		summarizeBy: none
+		sourceColumn: YearMonth
+
+		variation Variation
+			isDefault
+			relationship: eb56ac12-ab38-4eff-834c-c85634ede442
+			defaultHierarchy: LocalDateTable_86c19763-a749-4f74-b3f4-dbeb491030ef.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column YearMonthNoLeadingZero
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: fba940d2-525f-4ff9-a418-34c92149246d
+		summarizeBy: none
+		sourceColumn: YearMonthNoLeadingZero
+
+		variation Variation
+			isDefault
+			relationship: 14cc3569-f967-4298-beb7-4651092bb0f0
+			defaultHierarchy: LocalDateTable_84c0de45-e3ca-4bdd-befb-ae686154b87f.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column StartDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 6c685338-40df-4fce-953e-c52016548a50
+		summarizeBy: none
+		sourceColumn: StartDate
+
+		variation Variation
+			isDefault
+			relationship: 9035018c-25c8-4570-bcac-4515e197dcef
+			defaultHierarchy: LocalDateTable_a56c80a8-7fdd-4fc4-a51e-ad6c6ef5d8b2.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column EndDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 5abce7f8-9dde-49d8-bb33-3e13100f70db
+		summarizeBy: none
+		sourceColumn: EndDate
+
+		variation Variation
+			isDefault
+			relationship: 06b30d81-e44c-43aa-9adb-b2fb91ca2aa1
+			defaultHierarchy: LocalDateTable_212c2b53-fc33-4350-8d4e-e0031b94ce77.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column SubLedgerClosed
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 0085eefa-fa6d-4d5e-b74f-3eb3169c77ac
+		summarizeBy: none
+		sourceColumn: SubLedgerClosed
+
+		annotation SummarizationSetBy = Automatic
+
+	column LedgerClosed
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 01bae42b-238b-4c57-a18d-df0efa913777
+		summarizeBy: none
+		sourceColumn: LedgerClosed
+
+		annotation SummarizationSetBy = Automatic
+
+	column CompanyID
+		dataType: string
+		lineageTag: 6bbfca51-4cba-47ae-a34f-8c9bf37b3c39
+		summarizeBy: none
+		sourceColumn: CompanyID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition period = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jack.Chesney\OneDrive - X-pand\Microsoft Fabric\BI\Excel tables\Finance_Data.xlsx"), null, true),
+				    period_Sheet = Source{[Item="period",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(period_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"PeriodID", type text}, {"Period", Int64.Type}, {"PeriodYear", Int64.Type}, {"Year", Int64.Type}, {"Month", type text}, {"YearMonth", type date}, {"YearMonthNoLeadingZero", type date}, {"StartDate", type date}, {"EndDate", type date}, {"SubLedgerClosed", type logical}, {"LedgerClosed", type logical}, {"CompanyID", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

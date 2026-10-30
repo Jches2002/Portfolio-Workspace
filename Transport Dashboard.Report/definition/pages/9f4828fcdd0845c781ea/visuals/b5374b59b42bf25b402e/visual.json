@@ -283,6 +283,11 @@
         }
       ]
     },
+    "syncGroup": {
+      "groupName": "Calendar Year",
+      "fieldChanges": true,
+      "filterChanges": true
+    },
     "drillFilterOtherVisuals": true
   }
 }

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "868e357288012418152c",
+  "displayName": "Absence",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "visualInteractions": [
+    {
+      "source": "af844c85eb07dd543cc7",
+      "target": "a93dc26120b3b50ec704",
+      "type": "NoFilter"
+    },
+    {
+      "source": "989225d24362c562ae43",
+      "target": "a93dc26120b3b50ec704",
+      "type": "NoFilter"
+    },
+    {
+      "source": "cd50ba8620546acc6413",
+      "target": "a93dc26120b3b50ec704",
+      "type": "NoFilter"
+    },
+    {
+      "source": "8b9f0451e0ebab407b28",
+      "target": "a93dc26120b3b50ec704",
+      "type": "NoFilter"
+    }
+  ]
+}

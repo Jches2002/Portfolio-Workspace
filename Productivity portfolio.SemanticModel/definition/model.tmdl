@@ -1,0 +1,85 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-GB
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["jobheader","activitylog","activityloggrouped","activityloggroupedorg","aggregate","branch","employees","department","ActivityMerged","Holiday","LeaveDaily","OtherEventsLeave","PeopleHR_Staff","SickDays","EmployeesOffice","organisations","Benchmarks","EmployeeLeave","Dates","DatesViva","FutureDates","glcodes","period"]
+
+ref table DateTableTemplate_1b307028-9f4e-464b-b36b-a0358ac6655e
+ref table jobheader
+ref table LocalDateTable_bdbf2cd2-afd6-4bc6-a7e5-83189cf7da6c
+ref table LocalDateTable_a452dd12-3d1d-433e-907a-b3d7547a39d1
+ref table activitylog
+ref table LocalDateTable_84e918e6-5ab0-40b4-8c81-09e81ffdfda4
+ref table LocalDateTable_55824443-e9e5-4d75-aa53-86ab53769d73
+ref table LocalDateTable_5e602f3f-dc37-4b6e-ae3a-4525aa08a150
+ref table LocalDateTable_64bf318f-6009-47b3-ac5b-613fc1090d21
+ref table LocalDateTable_89446737-0e50-4baf-a26b-3200f42ff858
+ref table activityloggrouped
+ref table LocalDateTable_a8eb79ca-cec8-4cf1-9a95-99842c0171c4
+ref table LocalDateTable_dd79a3a7-cce2-4f6f-b0a5-24018966f561
+ref table LocalDateTable_28d26cfc-800e-43fc-9323-34647feb6ca5
+ref table activityloggroupedorg
+ref table LocalDateTable_f8cec738-4cf3-4555-ad91-bc326c6c6a53
+ref table LocalDateTable_76b6da92-3dbb-48b9-bb5b-6585b57875a9
+ref table LocalDateTable_fa55ca33-a619-4ad6-912f-0f2754335028
+ref table LocalDateTable_67d3afd6-105f-452d-b1b1-14ab39d48023
+ref table aggregate
+ref table branch
+ref table LocalDateTable_0eb98d35-0857-4ec7-8787-834b76d709dc
+ref table employees
+ref table department
+ref table LocalDateTable_14709b04-e7eb-4c21-8917-1caa557f601e
+ref table ActivityMerged
+ref table Holiday
+ref table LocalDateTable_d179ee75-ebcb-4d86-b85e-fe54c965bc35
+ref table LocalDateTable_7809e8a0-1ff5-4aed-b3b7-0d6259a27746
+ref table LocalDateTable_738eed28-0c3b-4570-8c8e-5e462bafc671
+ref table LocalDateTable_fae961ed-a750-4b44-85f0-3908a5f107b9
+ref table LeaveDaily
+ref table OtherEventsLeave
+ref table LocalDateTable_eaf704b0-ef3f-4dfe-bf11-e1539e6723b1
+ref table LocalDateTable_5dd6523e-6aa4-4d4c-924a-9b844254a64b
+ref table LocalDateTable_5b81db2d-1096-49e3-a50c-406db5196857
+ref table PeopleHR_Staff
+ref table LocalDateTable_ed498c10-a6de-4030-aa4f-564bc8318218
+ref table LocalDateTable_60d9ede2-06fe-446a-b355-c5a080b3c714
+ref table SickDays
+ref table LocalDateTable_7bdfb120-15b0-4b69-8ad7-e15fd8f8eb69
+ref table LocalDateTable_2954d640-d01c-4a8f-a4c3-e41d17ea5829
+ref table LocalDateTable_4ab9f155-79ec-4ff7-ada6-59f5c85b9528
+ref table EmployeesOffice
+ref table organisations
+ref table LocalDateTable_fe05d96c-30c7-43fa-bbb4-f4bbb2c24903
+ref table Benchmarks
+ref table EmployeeLeave
+ref table LocalDateTable_0c94a470-41f1-4596-85e5-487fb073e7e6
+ref table LocalDateTable_4d4dfeb2-eac7-4400-bcae-2b8572418743
+ref table LocalDateTable_58b3a6a2-9a0a-4d01-b572-928f0a352eef
+ref table Dates
+ref table LocalDateTable_12232360-a7d9-49c3-a7c7-25f5c09100b4
+ref table LocalDateTable_922200ce-5e6e-486a-8559-2f19068a8190
+ref table LocalDateTable_2f573f99-436f-48e8-b291-1eccf3534d0b
+ref table DatesViva
+ref table LocalDateTable_c622eb19-cea6-4cf4-8665-0a6c82017509
+ref table LocalDateTable_eff46805-6c3d-4bad-aee2-b9cfb7e8a93d
+ref table FutureDates
+ref table LocalDateTable_4350d21a-a06a-4762-9a88-db3d5f8fd16f
+ref table LocalDateTable_77a9187f-d9dd-4b28-94ae-a1ad9f394905
+ref table LocalDateTable_7cd09b73-8c58-4dfb-b45f-ed8b21d268bc
+ref table glcodes
+ref table LocalDateTable_c5ef8550-0835-4af3-a99f-f3b68be6f64a
+ref table period
+ref table LocalDateTable_86c19763-a749-4f74-b3f4-dbeb491030ef
+ref table LocalDateTable_84c0de45-e3ca-4bdd-befb-ae686154b87f
+ref table LocalDateTable_a56c80a8-7fdd-4fc4-a51e-ad6c6ef5d8b2
+ref table LocalDateTable_212c2b53-fc33-4350-8d4e-e0031b94ce77
+
+ref cultureInfo en-US
+
