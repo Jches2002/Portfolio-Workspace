@@ -1,0 +1,371 @@
+table 'Transport Jobs'
+	lineageTag: 715b8f43-7372-474c-bc85-e4689f357e92
+
+	measure 'Outsourced Jobs' = CALCULATE(COUNT('Transport Jobs'[Job ID]),'Transport Jobs'[Job Type] = "Outsourced")
+		formatString: 0
+		lineageTag: 6cecd226-766f-406d-ba33-5b8f41e26d36
+
+	measure 'Outsourced %' =
+			
+			DIVIDE(
+			    [Outsourced Jobs],
+			    [Jobs]
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 29063fff-ba5e-438d-9627-549b05b35e27
+
+	measure Jobs = COUNTROWS('Transport Jobs')
+		formatString: 0
+		lineageTag: ee235fbf-6f6a-4cbb-b72c-0efbf2148e71
+
+	measure 'On time' = CALCULATE(COUNT('Transport Jobs'[Job ID]), 'Transport Jobs'[On-time Delivery] = "Yes")
+		formatString: 0
+		lineageTag: 69d1ee2a-be98-4f55-81d7-8e44149a4337
+
+	measure 'Not on time' = CALCULATE(COUNT('Transport Jobs'[Job ID]), 'Transport Jobs'[On-time Delivery] = "No")
+		formatString: 0
+		lineageTag: 111a083e-96d4-4426-9cc5-6ace8be8024d
+
+	measure 'On Time %' = DIVIDE([On time], [Jobs])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 1029717e-eac8-465c-b6de-8667c6af2ad9
+
+	column 'Job ID'
+		dataType: string
+		lineageTag: 6d996dac-d5c4-44f3-9a60-5fc641eb9953
+		summarizeBy: none
+		sourceColumn: Job ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Job Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 7d7f324f-7209-4247-b5bb-752a34b82de2
+		summarizeBy: none
+		sourceColumn: Job Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Month Start'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ad073cd7-dfb5-4f78-a0e5-d6d70ce77bf3
+		summarizeBy: none
+		sourceColumn: Month Start
+
+		variation Variation
+			isDefault
+			relationship: 6063c4a6-4c14-44a9-ae55-a73a540566ec
+			defaultHierarchy: LocalDateTable_f3553cd6-7efb-4185-ba9f-a89827ee054d.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Financial Year'
+		dataType: int64
+		formatString: 0
+		lineageTag: b4104b83-a62f-47b4-afe5-02e3cddc6471
+		summarizeBy: sum
+		sourceColumn: Financial Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Financial Period'
+		dataType: string
+		lineageTag: 8c3495b3-7f96-4297-a47d-5249a1238978
+		summarizeBy: none
+		sourceColumn: Financial Period
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Job Type'
+		dataType: string
+		lineageTag: d9bf7cae-81ab-4470-b8c0-a2d9b80aa5ca
+		summarizeBy: none
+		sourceColumn: Job Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Branch
+		dataType: string
+		lineageTag: f7c839d0-8b4b-4af6-9e92-8494c34841ef
+		summarizeBy: none
+		sourceColumn: Branch
+
+		annotation SummarizationSetBy = Automatic
+
+	column Department
+		dataType: string
+		lineageTag: 8d6dde49-3c87-40c3-bfe6-063b0936e758
+		summarizeBy: none
+		sourceColumn: Department
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer ID'
+		dataType: string
+		lineageTag: 3282d1e9-63d1-4212-8129-763b14294dc6
+		summarizeBy: none
+		sourceColumn: Customer ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Name'
+		dataType: string
+		lineageTag: aff47633-0706-470e-9a66-864bc5d0aeec
+		summarizeBy: none
+		sourceColumn: Customer Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Vehicle ID'
+		dataType: string
+		lineageTag: 43f788ed-fc14-409d-8b68-8639254b42f2
+		summarizeBy: none
+		sourceColumn: Vehicle ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Vehicle
+		dataType: string
+		lineageTag: 0e6e7f73-8d4f-4139-a951-dc8481df3998
+		summarizeBy: none
+		sourceColumn: Vehicle
+
+		annotation SummarizationSetBy = Automatic
+
+	column Driver
+		dataType: string
+		lineageTag: 60e246f2-c856-4ce2-bb20-b20f3fa81bbd
+		summarizeBy: none
+		sourceColumn: Driver
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Carrier ID'
+		dataType: string
+		lineageTag: 9a281b9e-a32c-45aa-b537-77d4cd9db1e6
+		summarizeBy: none
+		sourceColumn: Carrier ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Carrier
+		dataType: string
+		lineageTag: 1d198648-2ed3-4edd-913b-814672f16f11
+		summarizeBy: none
+		sourceColumn: Carrier
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Package Type'
+		dataType: string
+		lineageTag: 7c929872-9597-400a-9a44-5c471880b34f
+		summarizeBy: none
+		sourceColumn: Package Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Pallets
+		dataType: int64
+		formatString: 0
+		lineageTag: 9470434d-13ca-4959-8ec7-adb570c17213
+		summarizeBy: sum
+		sourceColumn: Pallets
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cartons
+		dataType: int64
+		formatString: 0
+		lineageTag: 89459fa4-2432-46ff-bae4-26452acfa1f2
+		summarizeBy: sum
+		sourceColumn: Cartons
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Weight kg'
+		dataType: double
+		lineageTag: b4eafa1f-27e3-4e43-b4b6-809d102e20fa
+		summarizeBy: sum
+		sourceColumn: Weight kg
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Distance Miles'
+		dataType: int64
+		formatString: 0
+		lineageTag: 8f4f6a43-5868-4575-9518-c361de88c96d
+		summarizeBy: sum
+		sourceColumn: Distance Miles
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Revenue £'
+		dataType: double
+		formatString: "£"#,0.00;-"£"#,0.00;"£"#,0.00
+		lineageTag: 3b5b46d8-59e5-4828-8a7a-0274b3561e0e
+		summarizeBy: sum
+		sourceColumn: Revenue £
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	column 'Direct Cost £'
+		dataType: double
+		formatString: "£"#,0.00;-"£"#,0.00;"£"#,0.00
+		lineageTag: 0d08f024-c810-486d-aa0c-68a9c191270b
+		summarizeBy: sum
+		sourceColumn: Direct Cost £
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	column 'Gross Profit £'
+		dataType: double
+		formatString: "£"#,0.00;-"£"#,0.00;"£"#,0.00
+		lineageTag: 79ddbadc-a265-4855-bb1b-18f409978897
+		summarizeBy: sum
+		sourceColumn: Gross Profit £
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	column 'Gross Profit %'
+		dataType: double
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: c674399e-f5dd-4c82-a1e2-16c0c62b3b3f
+		summarizeBy: sum
+		sourceColumn: Gross Profit %
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Monthly Revenue £'
+		dataType: double
+		lineageTag: 7e6a7e10-7e65-4d64-8ba1-689013cb3fda
+		summarizeBy: sum
+		sourceColumn: Monthly Revenue £
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Monthly Overhead Pool £'
+		dataType: double
+		lineageTag: 69846b40-a44d-4f24-9eb6-da198fb5dabd
+		summarizeBy: sum
+		sourceColumn: Monthly Overhead Pool £
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Overhead £'
+		dataType: double
+		formatString: "£"#,0.00;-"£"#,0.00;"£"#,0.00
+		lineageTag: dad0cd2d-a719-4fe2-b38b-606e3ff1c2e4
+		summarizeBy: sum
+		sourceColumn: Overhead £
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	column 'Net Profit £'
+		dataType: double
+		formatString: "£"#,0.00;-"£"#,0.00;"£"#,0.00
+		lineageTag: cff2b086-c19c-467a-9a0d-4c52826579ed
+		summarizeBy: sum
+		sourceColumn: Net Profit £
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	column 'Net Profit %'
+		dataType: double
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 6b56de86-24d0-44d1-8469-82c6ba9e0479
+		summarizeBy: sum
+		sourceColumn: Net Profit %
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'On-time Delivery'
+		dataType: string
+		lineageTag: 586c4453-24bb-4108-85b9-6234c8c6a09c
+		summarizeBy: none
+		sourceColumn: On-time Delivery
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data Quality Flag'
+		dataType: string
+		lineageTag: cded66e7-9633-46e2-b508-26c23c4b9508
+		summarizeBy: none
+		sourceColumn: Data Quality Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Branch ID'
+		dataType: string
+		lineageTag: c92c82f1-ad4c-4e30-9f1a-d1ab41fd56a3
+		summarizeBy: none
+		sourceColumn: Branch ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Department ID'
+		dataType: string
+		lineageTag: 46e77b38-8d7e-44ee-b422-714b26923536
+		summarizeBy: none
+		sourceColumn: Department ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Job Utilisation %' =
+			
+			DIVIDE(
+			    'Transport Jobs'[Weight kg],
+			    RELATED(Vehicles[Weight Capacity kg])
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 2109f7bc-7418-4ad1-865d-da1f79ce9910
+		summarizeBy: average
+
+		annotation SummarizationSetBy = User
+
+	column 'Utilisation %'
+		dataType: double
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 30a84c6f-d6d9-4ef1-bb7d-a6cdb8fbfe86
+		summarizeBy: sum
+		sourceColumn: Utilisation %
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Transport Jobs' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jack.Chesney\OneDrive - X-pand\Microsoft Fabric\BI\Excel tables\Demo_Transport_Full_Test_Data_Branch_Department.xlsx"), null, true),
+				    #"Transport Jobs_Sheet" = Source{[Item="Transport Jobs",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Transport Jobs_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Job ID", type text}, {"Job Date", type date}, {"Month Start", type date}, {"Financial Year", Int64.Type}, {"Financial Period", type text}, {"Job Type", type text}, {"Branch", type text}, {"Department", type text}, {"Customer ID", type text}, {"Customer Name", type text}, {"Vehicle ID", type text}, {"Vehicle", type text}, {"Driver", type text}, {"Carrier ID", type text}, {"Carrier", type text}, {"Package Type", type text}, {"Pallets", Int64.Type}, {"Cartons", Int64.Type}, {"Weight kg", type number}, {"Distance Miles", Int64.Type}, {"Revenue £", type number}, {"Direct Cost £", type number}, {"Gross Profit £", type number}, {"Gross Profit %", type number}, {"Monthly Revenue £", type number}, {"Monthly Overhead Pool £", type number}, {"Overhead £", type number}, {"Net Profit £", type number}, {"Net Profit %", type number}, {"On-time Delivery", type text}, {"Data Quality Flag", type text}, {"Branch ID", type text}, {"Department ID", type text}, {"Job Utilisation %", Percentage.Type}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"Job Utilisation %", "Utilisation %"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

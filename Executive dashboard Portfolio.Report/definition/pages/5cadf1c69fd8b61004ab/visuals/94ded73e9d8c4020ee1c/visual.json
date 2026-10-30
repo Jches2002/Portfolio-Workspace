@@ -331,7 +331,9 @@
             }
           ]
         },
-        "howCreated": "User"
+        "howCreated": "User",
+        "isHiddenInViewMode": true,
+        "isLockedInViewMode": true
       },
       {
         "name": "b682c2656242aa5db3d9",

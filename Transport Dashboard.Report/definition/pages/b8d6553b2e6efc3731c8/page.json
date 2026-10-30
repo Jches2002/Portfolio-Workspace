@@ -1,0 +1,35 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "b8d6553b2e6efc3731c8",
+  "displayName": "Customer Profitability",
+  "displayOption": "FitToPage",
+  "height": 1080,
+  "width": 1920,
+  "visualInteractions": [
+    {
+      "source": "7da2bfc1c15d54ac1067",
+      "target": "8947fbd2668b93927af1",
+      "type": "DataFilter"
+    },
+    {
+      "source": "abea0939743d59c2ce6f",
+      "target": "8947fbd2668b93927af1",
+      "type": "DataFilter"
+    },
+    {
+      "source": "abea0939743d59c2ce6f",
+      "target": "7da2bfc1c15d54ac1067",
+      "type": "DataFilter"
+    },
+    {
+      "source": "ab681de0e24a4510d6f3",
+      "target": "7da2bfc1c15d54ac1067",
+      "type": "DataFilter"
+    },
+    {
+      "source": "ab681de0e24a4510d6f3",
+      "target": "8947fbd2668b93927af1",
+      "type": "DataFilter"
+    }
+  ]
+}

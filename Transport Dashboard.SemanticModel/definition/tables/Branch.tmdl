@@ -1,0 +1,50 @@
+table Branch
+	lineageTag: c3dd8730-7bc4-4432-ac43-db4ffe44cd13
+
+	column 'Branch ID'
+		dataType: string
+		lineageTag: 452eb1ec-a136-4c0f-b7a8-a09c82fcc7ff
+		summarizeBy: none
+		sourceColumn: Branch ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Branch
+		dataType: string
+		lineageTag: 7cb05962-edde-40e0-a40c-f399b16ba87d
+		summarizeBy: none
+		sourceColumn: Branch
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		lineageTag: 93f531e6-2645-4fe6-a681-481e39082f03
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Site Type'
+		dataType: string
+		lineageTag: 8dbe371f-83ea-4c0f-b8a1-8e3383609dd8
+		summarizeBy: none
+		sourceColumn: Site Type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Branch = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jack.Chesney\OneDrive - X-pand\Microsoft Fabric\BI\Excel tables\Demo_Transport_Full_Test_Data_Branch_Department.xlsx"), null, true),
+				    Branches_Sheet = Source{[Item="Branches",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Branches_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Branch ID", type text}, {"Branch", type text}, {"Region", type text}, {"Site Type", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

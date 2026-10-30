@@ -1,0 +1,86 @@
+table Vehicles
+	lineageTag: ef43e077-80ae-4450-9c08-53495d1fec9d
+
+	column 'Vehicle ID'
+		dataType: string
+		lineageTag: b6fc237d-1ef8-4482-84ef-5bb56446a3b1
+		summarizeBy: none
+		sourceColumn: Vehicle ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Vehicle
+		dataType: string
+		lineageTag: 8dcbe6fd-7578-405c-8bb8-f6667c356951
+		summarizeBy: none
+		sourceColumn: Vehicle
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Vehicle Type'
+		dataType: string
+		lineageTag: bd577d00-f820-4977-81dd-ffbfaee7c8c7
+		summarizeBy: none
+		sourceColumn: Vehicle Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Weight Capacity kg'
+		dataType: int64
+		formatString: 0
+		lineageTag: 72719f69-e5ec-43be-a799-65b4bf7ecf15
+		summarizeBy: none
+		sourceColumn: Weight Capacity kg
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pallet Capacity'
+		dataType: int64
+		formatString: 0
+		lineageTag: b2cc9d2b-01c3-4284-b099-3fe87bc1e7be
+		summarizeBy: none
+		sourceColumn: Pallet Capacity
+
+		annotation SummarizationSetBy = Automatic
+
+	column Branch
+		dataType: string
+		lineageTag: 27241590-eb43-4e40-944d-4a3233ae8df2
+		summarizeBy: none
+		sourceColumn: Branch
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Primary Driver'
+		dataType: string
+		lineageTag: 3025acb7-c433-4fd2-866f-1b6590c48052
+		summarizeBy: none
+		sourceColumn: Primary Driver
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Target Utilisation %'
+		dataType: double
+		lineageTag: 4cda84c3-b031-42d7-b3c0-5f2c1656c7e2
+		summarizeBy: none
+		sourceColumn: Target Utilisation %
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Vehicles = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jack.Chesney\OneDrive - X-pand\Microsoft Fabric\BI\Excel tables\Demo_Transport_Full_Test_Data_Branch_Department.xlsx"), null, true),
+				    Vehicles_Sheet = Source{[Item="Vehicles",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Vehicles_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Vehicle ID", type text}, {"Vehicle", type text}, {"Vehicle Type", type text}, {"Weight Capacity kg", Int64.Type}, {"Pallet Capacity", Int64.Type}, {"Branch", type text}, {"Primary Driver", type text}, {"Target Utilisation %", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -361,5 +361,70 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "3f157d80e7ac25ea0163",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "branch"
+              }
+            },
+            "Property": "BranchName"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "5bd09dea4663ee90ee88",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "aggregate"
+                  }
+                },
+                "Property": "RevenueConverted"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "0696377f3b6ec7c70e6b",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "aggregate"
+              }
+            },
+            "Property": "Gross Profit Margin"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "5af1ff5b144393326b60",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "aggregate"
+              }
+            },
+            "Property": "Net Profit %"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

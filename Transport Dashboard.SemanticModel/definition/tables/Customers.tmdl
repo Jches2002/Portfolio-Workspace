@@ -1,0 +1,59 @@
+table Customers
+	lineageTag: 7b0603dc-bfb5-46ff-b06a-3ca557cf4c49
+
+	column 'Customer ID'
+		dataType: string
+		lineageTag: 78c0ad26-704f-4804-a60f-b75867ae00c7
+		summarizeBy: none
+		sourceColumn: Customer ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Name'
+		dataType: string
+		lineageTag: cd6fa868-20da-4b74-89f3-92d8d11a2120
+		summarizeBy: none
+		sourceColumn: Customer Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Segment
+		dataType: string
+		lineageTag: c3475795-ecac-4e8e-9907-346dbb5a8306
+		summarizeBy: none
+		sourceColumn: Segment
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Home Branch'
+		dataType: string
+		lineageTag: e62efa48-f325-4f0d-8022-8c82d6f201db
+		summarizeBy: none
+		sourceColumn: Home Branch
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Service Tier'
+		dataType: string
+		lineageTag: a15ec84f-d339-49d5-a9bf-b1d5ed3d6473
+		summarizeBy: none
+		sourceColumn: Service Tier
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Customers = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jack.Chesney\OneDrive - X-pand\Microsoft Fabric\BI\Excel tables\Demo_Transport_Full_Test_Data_Branch_Department.xlsx"), null, true),
+				    Customers_Sheet = Source{[Item="Customers",Kind="Sheet"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(Customers_Sheet,{{"Column1", type text}, {"Column2", type text}, {"Column3", type text}, {"Column4", type text}, {"Column5", type text}}),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Changed Type", [PromoteAllScalars=true]),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Promoted Headers",{{"Customer ID", type text}, {"Customer Name", type text}, {"Segment", type text}, {"Home Branch", type text}, {"Service Tier", type text}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

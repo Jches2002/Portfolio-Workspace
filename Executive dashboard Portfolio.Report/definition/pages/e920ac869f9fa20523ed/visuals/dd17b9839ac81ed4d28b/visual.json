@@ -910,6 +910,98 @@
             }
           ]
         }
+      },
+      {
+        "name": "9d40aacb4ce759490490",
+        "field": {
+          "HierarchyLevel": {
+            "Expression": {
+              "Hierarchy": {
+                "Expression": {
+                  "PropertyVariationSource": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "period"
+                      }
+                    },
+                    "Name": "Variation",
+                    "Property": "YearMonth"
+                  }
+                },
+                "Hierarchy": "Date Hierarchy"
+              }
+            },
+            "Level": "Year"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "0613ce732b8a1e0eb436",
+        "field": {
+          "HierarchyLevel": {
+            "Expression": {
+              "Hierarchy": {
+                "Expression": {
+                  "PropertyVariationSource": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "period"
+                      }
+                    },
+                    "Name": "Variation",
+                    "Property": "YearMonth"
+                  }
+                },
+                "Hierarchy": "Date Hierarchy"
+              }
+            },
+            "Level": "Month"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "96226f606d34091a9a84",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "department"
+              }
+            },
+            "Property": "Name"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "be22d41a8071cc8de52c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "glcodes"
+              }
+            },
+            "Property": "GlCodeGrouped"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "cd7ef32ced20555e04a2",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "aggregate"
+              }
+            },
+            "Property": "P&L Value"
+          }
+        },
+        "type": "Advanced"
       }
     ]
   }

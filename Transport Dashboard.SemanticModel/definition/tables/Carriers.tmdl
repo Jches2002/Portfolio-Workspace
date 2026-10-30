@@ -1,0 +1,63 @@
+table Carriers
+	lineageTag: b9e49bf2-a417-472c-bf55-c8c3c768d683
+
+	column 'Carrier ID'
+		dataType: string
+		lineageTag: 2697983c-5c78-4481-9539-6a6f01388a7d
+		summarizeBy: none
+		sourceColumn: Carrier ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Carrier Name'
+		dataType: string
+		lineageTag: 2f055e08-00c0-4f38-8631-1f2e81cef4a1
+		summarizeBy: none
+		sourceColumn: Carrier Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Service Type'
+		dataType: string
+		lineageTag: eccd73f0-3dfd-46b6-830a-219af888de50
+		summarizeBy: none
+		sourceColumn: Service Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Typical Cost per Job £'
+		dataType: double
+		formatString: "£"#,0.00;-"£"#,0.00;"£"#,0.00
+		lineageTag: dabbf829-b75e-4161-8578-226ab9d0506e
+		summarizeBy: none
+		sourceColumn: Typical Cost per Job £
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	column 'Target On-time %'
+		dataType: double
+		lineageTag: fe21bdd6-f927-476a-ab26-5ae3ba578152
+		summarizeBy: none
+		sourceColumn: Target On-time %
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Carriers = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Jack.Chesney\OneDrive - X-pand\Microsoft Fabric\BI\Excel tables\Demo_Transport_Full_Test_Data_Branch_Department.xlsx"), null, true),
+				    Carriers_Sheet = Source{[Item="Carriers",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Carriers_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Carrier ID", type text}, {"Carrier Name", type text}, {"Service Type", type text}, {"Typical Cost per Job £", type number}, {"Target On-time %", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

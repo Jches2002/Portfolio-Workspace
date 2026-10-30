@@ -1,0 +1,39 @@
+relationship 5f8b04c3-2778-41f4-a5fe-d33de02d4722
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Dates.Date
+	toColumn: LocalDateTable_59e3e63e-1e81-43ae-a73c-c02be92e9ff7.Date
+
+relationship 9434b9ae-3bf3-4ff2-bdf7-40103dce947a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Dates.'Month Start'
+	toColumn: LocalDateTable_f3924afa-1f37-4e6d-940f-c00164b038cb.Date
+
+relationship 6063c4a6-4c14-44a9-ae55-a73a540566ec
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Transport Jobs'.'Month Start'
+	toColumn: LocalDateTable_f3553cd6-7efb-4185-ba9f-a89827ee054d.Date
+
+relationship AutoDetected_cc020855-43ec-4f0c-9994-8329e0605c6e
+	fromColumn: 'Transport Jobs'.'Branch ID'
+	toColumn: Branch.'Branch ID'
+
+relationship AutoDetected_76879852-daf9-4657-b9b8-1065536dcd91
+	fromColumn: 'Transport Jobs'.'Carrier ID'
+	toColumn: Carriers.'Carrier ID'
+
+relationship AutoDetected_c212d23f-a6f9-4c41-be83-40a574e07c21
+	fromColumn: 'Transport Jobs'.'Customer ID'
+	toColumn: Customers.'Customer ID'
+
+relationship AutoDetected_239fdbf7-72ee-4897-8974-b465797aeba4
+	fromColumn: 'Transport Jobs'.'Department ID'
+	toColumn: Departments.'Department ID'
+
+relationship AutoDetected_ccbc321c-05b5-4fa1-bfc6-5e101e598001
+	fromColumn: 'Transport Jobs'.'Vehicle ID'
+	toColumn: Vehicles.'Vehicle ID'
+
+relationship aefa1a11-272b-de67-8b6f-55d46bc9a8e6
+	fromColumn: 'Transport Jobs'.'Job Date'
+	toColumn: Dates.Date
+

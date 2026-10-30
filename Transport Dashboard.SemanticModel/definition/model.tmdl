@@ -1,0 +1,27 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-GB
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Branch","Dates","Carriers","Customers","Departments","Vehicles","Transport Jobs"]
+
+ref table Branch
+ref table Dates
+ref table DateTableTemplate_9800f2d2-d191-4fcd-8da1-22a3cf108615
+ref table LocalDateTable_59e3e63e-1e81-43ae-a73c-c02be92e9ff7
+ref table LocalDateTable_f3924afa-1f37-4e6d-940f-c00164b038cb
+ref table Carriers
+ref table Customers
+ref table Departments
+ref table Vehicles
+ref table 'Transport Jobs'
+ref table LocalDateTable_f3553cd6-7efb-4185-ba9f-a89827ee054d
+
+ref cultureInfo en-US
+

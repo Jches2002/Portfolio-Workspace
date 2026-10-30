@@ -564,6 +564,76 @@
             }
           ]
         }
+      },
+      {
+        "name": "21132b30781681c7c0c1",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Variance Metrics"
+              }
+            },
+            "Property": "Metric"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "64cbb8fe5adadc1013e9",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Variance Metrics"
+              }
+            },
+            "Property": "Variance Actual"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "daddf5dc6c42b032c020",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Variance Metrics"
+              }
+            },
+            "Property": "Variance Budget"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "43a0c7cceca355b12209",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Variance Metrics"
+              }
+            },
+            "Property": "Variance"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "521bb84d1441858456e3",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Variance Metrics"
+              }
+            },
+            "Property": "Variance %"
+          }
+        },
+        "type": "Advanced"
       }
     ]
   }

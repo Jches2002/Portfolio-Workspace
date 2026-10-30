@@ -394,6 +394,48 @@
         },
         "isHiddenInViewMode": true,
         "isLockedInViewMode": true
+      },
+      {
+        "name": "fbd9d85eccee447b1c40",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Dates"
+              }
+            },
+            "Property": "MonthYear"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "3f136a963921d587436c",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Metric Selector"
+              }
+            },
+            "Property": "Selected Budget"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "db0d429d42a35a95ee70",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Metric Selector"
+              }
+            },
+            "Property": "Selected Variance %"
+          }
+        },
+        "type": "Advanced"
       }
     ]
   }

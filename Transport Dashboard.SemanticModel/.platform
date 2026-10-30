@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Transport Dashboard"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "26e55d16-9f55-880a-4390-9ce3e88c39f2"
+  }
+}

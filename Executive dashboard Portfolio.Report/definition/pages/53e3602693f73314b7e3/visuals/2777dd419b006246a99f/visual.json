@@ -903,6 +903,84 @@
             }
           ]
         }
+      },
+      {
+        "name": "ac6a47d39a155925ec02",
+        "field": {
+          "HierarchyLevel": {
+            "Expression": {
+              "Hierarchy": {
+                "Expression": {
+                  "PropertyVariationSource": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "period"
+                      }
+                    },
+                    "Name": "Variation",
+                    "Property": "YearMonth"
+                  }
+                },
+                "Hierarchy": "Date Hierarchy"
+              }
+            },
+            "Level": "Year"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "1647bcc9ad021cc06605",
+        "field": {
+          "HierarchyLevel": {
+            "Expression": {
+              "Hierarchy": {
+                "Expression": {
+                  "PropertyVariationSource": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "period"
+                      }
+                    },
+                    "Name": "Variation",
+                    "Property": "YearMonth"
+                  }
+                },
+                "Hierarchy": "Date Hierarchy"
+              }
+            },
+            "Level": "Month"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "856bd2695121368a834e",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "glcodes"
+              }
+            },
+            "Property": "GlCodeGrouped"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "52087760d42ce8a06c16",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "aggregate"
+              }
+            },
+            "Property": "P&L Value"
+          }
+        },
+        "type": "Advanced"
       }
     ]
   }
