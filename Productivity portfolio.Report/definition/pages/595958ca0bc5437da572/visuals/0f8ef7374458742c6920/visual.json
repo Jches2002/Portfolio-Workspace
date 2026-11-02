@@ -23,11 +23,11 @@
                       "Entity": "branch"
                     }
                   },
-                  "Property": "BranchHeader"
+                  "Property": "Portfolio Branch"
                 }
               },
-              "queryRef": "branch.BranchHeader",
-              "nativeQueryRef": "BranchHeader",
+              "queryRef": "branch.Portfolio Branch",
+              "nativeQueryRef": "Portfolio Branch",
               "active": true
             }
           ]
@@ -438,5 +438,51 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "c33804a984418917014a",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "ActivityMerged"
+              }
+            },
+            "Property": "Capacity %"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "4afecb9ce5d44246e771",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "aggregate"
+              }
+            },
+            "Property": "Unutilised Cost Dynamic"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "151d9a350369b868ab04",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "branch"
+              }
+            },
+            "Property": "Portfolio Branch"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
   }
 }

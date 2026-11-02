@@ -47,7 +47,8 @@
                 }
               },
               "queryRef": "branch.Portfolio Branch",
-              "nativeQueryRef": "Portfolio Branch"
+              "nativeQueryRef": "Branch",
+              "displayName": "Branch"
             }
           ]
         },

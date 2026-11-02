@@ -284,5 +284,65 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "25896b1ae394ec75a032",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "EmployeesOffice"
+              }
+            },
+            "Property": "Name"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "1f706b3c9ba4206a70ae",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "department"
+              }
+            },
+            "Property": "Header"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "b4af4b29a1313e1d6710",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "branch"
+              }
+            },
+            "Property": "BranchHeader"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "1b523603d87d7e903ab0",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "ActivityMerged"
+              }
+            },
+            "Property": "Capacity %"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

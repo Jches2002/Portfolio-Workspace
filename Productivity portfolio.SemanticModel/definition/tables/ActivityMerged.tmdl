@@ -354,6 +354,13 @@ table ActivityMerged
 			    FORMAT(Hours, "00") & ":" & FORMAT(Minutes, "00")
 		lineageTag: fbb504be-616f-4ad1-85e2-5cf0d2fd44ba
 
+	measure 'Unutilised test %' =
+			
+			1 - [Capacity %]
+		lineageTag: 1249e6c3-d1f3-4e55-a331-6c70a09908b0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	column Date
 		dataType: dateTime
 		formatString: dd mmmm yyyy

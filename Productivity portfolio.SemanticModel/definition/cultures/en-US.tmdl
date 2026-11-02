@@ -53527,6 +53527,39 @@ cultureInfo en-US
 			    }
 			  },
 			  "Relationships": {
+			    "period_year_month_date_hierarchy_has_period_year_month_year": {
+			      "Binding": {
+			        "ConceptualEntity": "period"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "period.year_month.date_hierarchy": {
+			          "Target": {
+			            "Entity": "period.year_month.date_hierarchy"
+			          }
+			        },
+			        "period.year_month.year": {
+			          "Target": {
+			            "Entity": "period.year_month.year"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "period.year_month.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "period.year_month.year"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "year_month_date_hierarchies_have_year_month_years"
+			        }
+			      ]
+			    },
 			    "period_year_month_has_date_hierarchy": {
 			      "Binding": {
 			        "ConceptualEntity": "period"
@@ -54018,7 +54051,7 @@ cultureInfo en-US
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "year_month_date_hierarchies_have_year_month_years"
+			          "ID": "year_month_date_hierarchies_have_year_month_years1"
 			        }
 			      ]
 			    },
@@ -54513,7 +54546,7 @@ cultureInfo en-US
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "year_month_date_hierarchies_have_year_month_years1"
+			          "ID": "year_month_date_hierarchies_have_year_month_years2"
 			        }
 			      ]
 			    },
@@ -54843,7 +54876,7 @@ cultureInfo en-US
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "year_month_date_hierarchies_have_year_month_years2"
+			          "ID": "year_month_date_hierarchies_have_year_month_years3"
 			        }
 			      ]
 			    },
@@ -58473,7 +58506,7 @@ cultureInfo en-US
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "year_month_date_hierarchies_have_year_month_years3"
+			          "ID": "year_month_date_hierarchies_have_year_month_years4"
 			        }
 			      ]
 			    },
@@ -60288,7 +60321,7 @@ cultureInfo en-US
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "year_month_date_hierarchies_have_year_month_years4"
+			          "ID": "year_month_date_hierarchies_have_year_month_years5"
 			        }
 			      ]
 			    },
@@ -76230,39 +76263,6 @@ cultureInfo en-US
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "some_organisations_are_service_organisations"
-			        }
-			      ]
-			    },
-			    "period_year_month_date_hierarchy_has_period_year_month_year": {
-			      "Binding": {
-			        "ConceptualEntity": "period"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "period.year_month.date_hierarchy": {
-			          "Target": {
-			            "Entity": "period.year_month.date_hierarchy"
-			          }
-			        },
-			        "period.year_month.year": {
-			          "Target": {
-			            "Entity": "period.year_month.year"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "period.year_month.date_hierarchy"
-			            },
-			            "Object": {
-			              "Role": "period.year_month.year"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "year_month_date_hierarchies_have_year_month_years5"
 			        }
 			      ]
 			    },
