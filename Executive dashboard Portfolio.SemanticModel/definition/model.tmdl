@@ -11,6 +11,8 @@ annotation __PBI_TimeIntelligenceEnabled = 1
 
 annotation PBI_QueryOrder = ["aggregate","glcodes","period","Dates","department","branch","budget"]
 
+annotation PBI_ProTooling = ["WebModelingEdit"]
+
 ref table aggregate
 ref table glcodes
 ref table DateTableTemplate_4864e5b5-fc0d-4570-af2d-986c32343488

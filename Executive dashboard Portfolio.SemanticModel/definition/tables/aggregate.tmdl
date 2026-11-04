@@ -27,13 +27,11 @@ table aggregate
 			VAR Revenue =
 			    CALCULATE(
 			        SUM('Aggregate'[AmountConverted]),
-			        glcodes[GlCodeGrouped] = "Revenue"
-			    )
+			        glcodes[GlCodeGrouped] = "Revenue")
 			VAR CostOfSales =
 			    -CALCULATE(            
 			        SUM('Aggregate'[AmountConverted]),
-			        glcodes[GlCodeGrouped] = "Cost of sales"
-			    )
+			        glcodes[GlCodeGrouped] = "Cost of sales")
 			RETURN
 			Revenue - CostOfSales
 			```

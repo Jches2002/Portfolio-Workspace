@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "Quotes Ingest"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "90e48252-31fb-88fa-45ed-f7be5bd0e7e0"
+  }
+}
